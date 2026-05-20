@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dahilayan Adventure Park – Bukidnon Tourism</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Lato:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link rel="stylesheet" href="styles/index_style.css">
+<style>
+:root{--gold:#ccbc52;--gold-dark:#a89c38;--gold-light:#e8da7a;--black:#0e0e0e;--dark:#141414;--mid:#222;--dark-card:#1c1c1c;--white:#fff;--off-white:#fafaf5;--warm-bg:#fdf8ef;--text-body:#444;--text-muted:#888;--font-display:'Cinzel',serif;--font-body:'Lato',sans-serif;--header-h:80px;--nav-h:54px;--radius:6px;--transition:.25s ease;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}body{font-family:var(--font-body);background:var(--off-white);color:var(--text-body);overflow-x:hidden;}img{max-width:100%;display:block;}a{text-decoration:none;}
+
+/* HEADER */
+.site-header{position:sticky;top:0;z-index:1200;height:var(--header-h);background:var(--white);border-bottom:3px solid var(--gold);box-shadow:0 2px 18px rgba(0,0,0,.10);transition:height var(--transition);}
+.site-header.header-scrolled{height:64px;}
+.header-inner{height:100%;padding:0 28px;}
+.site-logo{width:54px;height:54px;border-radius:50%;border:2.5px solid var(--gold);object-fit:cover;transition:width var(--transition),height var(--transition);}
+.header-scrolled .site-logo{width:44px;height:44px;}
+.header-sub{font-size:9px;font-weight:700;letter-spacing:2.5px;color:var(--text-muted);text-transform:uppercase;line-height:1;}
+.header-title{font-family:var(--font-display);font-size:12.5px;font-weight:700;letter-spacing:1px;color:var(--black);line-height:1.35;}
+
+/* HAMBURGER */
+.hamburger-btn{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:8px;}
+.hamburger-btn span{display:block;width:26px;height:2px;background:var(--black);border-radius:2px;transition:transform .3s,opacity .3s;}
+.hamburger-btn.active span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger-btn.active span:nth-child(2){opacity:0;}
+.hamburger-btn.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+/* NAV */
+.main-nav{background:var(--dark);border-bottom:3px solid var(--gold);position:sticky;top:var(--header-h);z-index:1100;transition:top var(--transition);}
+.header-scrolled~.main-nav{top:64px;}
+.nav-inner{min-height:var(--nav-h);}
+.nav-list{list-style:none;}
+.nav-item-custom{position:relative;}
+.nav-link-custom{display:flex;align-items:center;gap:6px;padding:0 13px;height:var(--nav-h);color:var(--white);font-family:var(--font-display);font-size:10px;letter-spacing:1.1px;text-transform:uppercase;white-space:nowrap;cursor:pointer;transition:background var(--transition),color var(--transition);}
+.nav-link-custom:hover,.nav-item-active .nav-link-custom{background:var(--gold);color:var(--black);}
+.nav-chevron{font-size:11px;transition:transform .3s;}
+.nav-item-custom:hover .nav-chevron,.nav-item-open .nav-chevron{transform:rotate(180deg);}
+.nav-page-label{display:flex;align-items:center;}
+.nav-section-pill{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-display);font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);background:rgba(204,188,82,.10);border:1px solid rgba(204,188,82,.30);border-radius:20px;padding:4px 14px;white-space:nowrap;pointer-events:none;margin:0 6px;}
+.nav-cta .nav-link-custom{background:rgba(204,188,82,.10);border-left:1px solid rgba(204,188,82,.30);color:var(--gold-light);}
+.nav-cta .nav-link-custom:hover{background:var(--gold);color:var(--black);}
+
+/* DROPDOWN */
+.nav-dropdown{display:none;position:absolute;top:var(--nav-h);left:0;min-width:230px;background:var(--mid);border-top:3px solid var(--gold);list-style:none;box-shadow:0 12px 32px rgba(0,0,0,.4);z-index:999;animation:dropIn .2s ease;}
+.nav-item-custom:hover .nav-dropdown{display:block;}
+@keyframes dropIn{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:translateY(0);}}
+.nav-dropdown li a{display:flex;align-items:center;gap:10px;padding:12px 20px;color:#ccc;font-size:13px;border-bottom:1px solid rgba(255,255,255,.05);transition:background var(--transition),color var(--transition),padding-left var(--transition);}
+.nav-dropdown li:last-child a{border-bottom:none;}
+.nav-dropdown li a:hover{background:var(--gold);color:var(--black);padding-left:28px;font-weight:700;}
+
+/* BUTTONS */
+.btn-gold{display:inline-block;padding:13px 34px;background:var(--gold);color:var(--black);font-family:var(--font-display);font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;border-radius:var(--radius);border:2px solid var(--gold);box-shadow:0 6px 28px rgba(204,188,82,.35);transition:background var(--transition),transform .2s;}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-2px);color:var(--black);}
+.btn-ghost{display:inline-block;padding:13px 34px;background:transparent;color:var(--white);font-family:var(--font-display);font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;border-radius:var(--radius);border:2px solid rgba(255,255,255,.5);transition:all var(--transition);}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold-light);transform:translateY(-2px);}
+
+/* PAGE HERO */
+.page-hero{position:relative;width:100%;height:520px;overflow:hidden;}
+.page-hero-bg{width:100%;height:100%;object-fit:cover;object-position:center;animation:heroZoom 16s ease-in-out infinite alternate;}
+@keyframes heroZoom{from{transform:scale(1);}to{transform:scale(1.06);}}
+.page-hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.1) 0%,rgba(0,0,0,.52) 55%,rgba(0,0,0,.82) 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;}
+.page-hero-eyebrow{font-size:11px;font-weight:700;letter-spacing:5px;color:var(--gold-light);text-transform:uppercase;margin-bottom:14px;animation:fadeDown .8s ease both;}
+.page-hero-title{font-family:var(--font-display);font-size:clamp(40px,7vw,82px);font-weight:900;color:var(--white);letter-spacing:6px;text-shadow:0 6px 40px rgba(0,0,0,.6);line-height:1.05;animation:fadeDown .9s .1s ease both;}
+.page-hero-sub{font-size:13px;letter-spacing:2px;color:rgba(255,255,255,.75);margin-top:16px;text-transform:uppercase;animation:fadeUp .8s .2s ease both;}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+
+/* BREADCRUMB */
+.breadcrumb-bar{background:var(--dark);border-bottom:1px solid rgba(255,255,255,.07);padding:10px 0;}
+.breadcrumb-bar .breadcrumb{margin:0;background:none;padding:0;}
+.breadcrumb-bar .breadcrumb-item a{color:var(--gold);font-size:12px;font-weight:700;}
+.breadcrumb-bar .breadcrumb-item.active{color:#aaa;font-size:12px;}
+.breadcrumb-bar .breadcrumb-item+.breadcrumb-item::before{color:#555;}
+
+/* FACT BAND */
+.fact-bar{background:var(--gold);}
+.fact-item{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px;border-right:1px solid rgba(0,0,0,.12);text-align:center;}
+.fact-item:last-child{border-right:none;}
+.fact-num{font-family:var(--font-display);font-size:clamp(22px,3.5vw,34px);font-weight:900;color:var(--black);line-height:1;}
+.fact-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(0,0,0,.6);margin-top:5px;}
+
+/* SLIDER */
+.slider-section{overflow:hidden;background:var(--black);}
+.slider-label-bar{font-family:var(--font-display);font-size:10px;letter-spacing:6px;color:var(--gold);text-align:center;padding:22px 0 14px;text-transform:uppercase;}
+.slide-track{display:flex;animation:scroll 28s linear infinite;width:max-content;}
+.slide-track img{width:340px;height:230px;object-fit:cover;flex-shrink:0;border-right:4px solid var(--black);}
+@keyframes scroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* SECTIONS */
+.section-block{padding:80px 0;}
+.section-dark{background:var(--dark);}
+.section-warm{background:var(--warm-bg);}
+.section-eyebrow{display:inline-block;font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+.section-eyebrow.light{color:var(--gold-light);}
+.section-heading{font-family:var(--font-display);font-size:clamp(26px,4vw,42px);font-weight:900;color:var(--black);letter-spacing:2px;line-height:1.15;}
+.section-heading.light{color:var(--white);}
+.section-rule{width:56px;height:3px;background:linear-gradient(90deg,var(--gold-dark),var(--gold-light));border-radius:2px;margin:18px 0;}
+.section-intro{font-size:15px;line-height:1.8;color:#999;max-width:620px;margin:0 auto;}
+.section-body{font-size:15.5px;line-height:1.85;color:var(--text-body);}
+.info-pill{background:rgba(204,188,82,.08);border:1px solid rgba(204,188,82,.3);border-radius:30px;padding:8px 16px;font-size:12.5px;font-weight:700;color:var(--gold-dark);display:flex;align-items:center;gap:8px;}
+
+/* INFO CARDS */
+.info-card{background:var(--white);border-radius:var(--radius);border-top:4px solid var(--gold);box-shadow:0 4px 20px rgba(0,0,0,.08);padding:32px 24px;text-align:center;height:100%;transition:transform .3s,box-shadow .3s;}
+.info-card:hover{transform:translateY(-5px);box-shadow:0 12px 32px rgba(0,0,0,.14);}
+.info-card-icon{font-size:44px;margin-bottom:16px;}
+.info-card h3{font-family:var(--font-display);font-size:14px;font-weight:700;letter-spacing:1px;color:var(--black);margin-bottom:10px;}
+.info-card p{font-size:13.5px;line-height:1.8;color:#555;margin:0;}
+
+/* ACTIVITY CARDS */
+.activity-card{background:var(--white);border-radius:var(--radius);border-bottom:4px solid var(--gold);box-shadow:0 4px 20px rgba(0,0,0,.09);overflow:hidden;height:100%;transition:transform .3s,box-shadow .3s;}
+.activity-card:hover{transform:translateY(-6px);box-shadow:0 16px 36px rgba(0,0,0,.18);}
+.activity-header{padding:30px 20px;text-align:center;}
+.activity-emoji{font-size:50px;display:block;margin-bottom:12px;}
+.activity-name{font-family:var(--font-display);font-size:15px;font-weight:700;letter-spacing:2px;color:var(--white);margin:0;}
+.activity-body{padding:22px 24px;}
+.activity-body p{font-size:13.5px;line-height:1.8;color:#555;margin:0;}
+.activity-tags{margin-top:14px;display:flex;gap:8px;flex-wrap:wrap;}
+.tag-gold{background:var(--gold);color:var(--black);font-size:10px;font-weight:700;letter-spacing:1px;padding:4px 12px;border-radius:20px;}
+.tag-outline{background:#f0ead0;color:var(--gold-dark);font-size:10px;font-weight:700;padding:4px 12px;border-radius:20px;}
+
+/* PRICE TABLE */
+.price-table{width:100%;border-collapse:collapse;}
+.price-table th{background:var(--gold);color:var(--black);font-family:var(--font-display);font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:14px 20px;text-align:left;}
+.price-table td{padding:14px 20px;font-size:14px;border-bottom:1px solid rgba(0,0,0,.07);color:var(--text-body);}
+.price-table tr:hover td{background:rgba(204,188,82,.06);}
+.price-badge{display:inline-block;background:var(--gold);color:var(--black);font-weight:700;font-size:13px;padding:3px 12px;border-radius:20px;}
+
+/* TIP CARDS */
+.tip-card{background:var(--black);border-radius:var(--radius);border-top:4px solid var(--gold);box-shadow:0 4px 20px rgba(0,0,0,.25);padding:28px 24px;text-align:center;height:100%;transition:transform .3s;}
+.tip-card:hover{transform:translateY(-4px);}
+.tip-icon{font-size:36px;margin-bottom:12px;display:block;}
+.tip-card h3{font-family:var(--font-display);font-size:13px;font-weight:700;letter-spacing:1px;color:var(--gold);margin-bottom:10px;}
+.tip-card p{font-size:13.5px;line-height:1.8;color:#bbb;margin:0;}
+
+/* FESTIVAL */
+.festival-card{background:linear-gradient(135deg,#1a1a0a,#2b2b00);border:1px solid rgba(204,188,82,.3);border-radius:8px;padding:48px 40px;}
+.festival-badge{display:inline-block;background:var(--gold);color:var(--black);font-family:var(--font-display);font-size:11px;font-weight:900;letter-spacing:4px;padding:5px 20px;border-radius:20px;margin-bottom:18px;}
+.festival-title{font-family:var(--font-display);font-size:clamp(24px,4vw,38px);font-weight:900;letter-spacing:3px;color:var(--white);margin-bottom:10px;}
+.festival-dates-txt{font-size:13px;font-weight:700;letter-spacing:2px;color:var(--gold);text-transform:uppercase;}
+.festival-rule{width:50px;height:2px;background:var(--gold);border-radius:2px;margin:22px auto;}
+.festival-desc{font-size:15px;line-height:1.85;color:#bbb;}
+.festival-hl{background:rgba(204,188,82,.1);border-left:3px solid var(--gold);padding:12px 18px;border-radius:0 4px 4px 0;font-size:14px;color:var(--gold-light);margin-top:20px;display:flex;align-items:center;gap:10px;}
+.fest-tag{display:inline-block;padding:5px 14px;background:rgba(204,188,82,.15);border:1px solid rgba(204,188,82,.3);color:var(--gold-light);font-size:12px;font-weight:700;border-radius:20px;transition:background var(--transition),color var(--transition),transform .2s;}
+.fest-tag:hover{background:var(--gold);border-color:var(--gold);color:var(--black);transform:translateY(-2px);}
+
+/* FOOTER */
+.site-footer{background:var(--black);border-top:3px solid var(--gold);padding:56px 0 0;color:var(--white);}
+.footer-logo{width:48px;height:48px;border-radius:50%;border:2px solid var(--gold);object-fit:cover;}
+.footer-province-sub{font-size:8.5px;font-weight:700;letter-spacing:2px;color:var(--text-muted);text-transform:uppercase;margin-bottom:2px;}
+.footer-province-name{font-family:var(--font-display);font-size:10.5px;font-weight:700;color:var(--white);letter-spacing:.5px;line-height:1.4;}
+.footer-about{font-size:13px;line-height:1.75;color:#888;margin:0;}
+.footer-heading{font-family:var(--font-display);font-size:11px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:16px;font-weight:700;}
+.footer-links{list-style:none;padding:0;margin:0;}
+.footer-links li,.footer-links li a{font-size:13px;line-height:1.7;color:#888;display:flex;align-items:center;padding:3px 0;transition:color .2s;}
+.footer-links li a:hover{color:var(--gold-light);}
+.footer-bottom{margin-top:40px;border-top:1px solid rgba(255,255,255,.07);padding:18px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;}
+.footer-bottom p{font-size:12px;color:#555;margin:0;}
+
+/* BACK TO TOP */
+.back-to-top{position:fixed;bottom:32px;right:28px;z-index:900;width:44px;height:44px;background:var(--gold);color:var(--black);border:none;border-radius:50%;font-size:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 20px rgba(204,188,82,.45);opacity:0;transform:translateY(20px);transition:opacity .3s,transform .3s;pointer-events:none;}
+.back-to-top.visible{opacity:1;transform:translateY(0);pointer-events:auto;}
+.back-to-top:hover{background:var(--gold-light);}
+
+/* REVEAL */
+.will-reveal{opacity:0;transform:translateY(28px);transition:opacity .55s ease,transform .55s ease;}
+.will-reveal.revealed{opacity:1;transform:translateY(0);}
+
+/* RESPONSIVE */
+@media(max-width:1199.98px){
+  .hamburger-btn{display:flex;}
+  .main-nav{position:fixed;top:var(--header-h);left:0;right:0;max-height:0;overflow:hidden;overflow-y:auto;transition:max-height .4s ease;border-bottom:none;}
+  .main-nav.nav-open{max-height:calc(100vh - var(--header-h));border-bottom:3px solid var(--gold);}
+  .nav-inner{flex-direction:column;align-items:stretch;padding:0;}
+  .nav-list{flex-direction:column;}
+  .nav-link-custom{height:50px;padding:0 20px;}
+  .nav-dropdown{position:static;box-shadow:none;border-top:1px solid rgba(255,255,255,.06);animation:none;background:#1a1a1a;display:none;}
+  .nav-item-open .nav-dropdown{display:block;}
+  .nav-page-label{padding:8px 20px;}
+}
+@media(max-width:767.98px){
+  .section-block{padding:56px 0;}
+  .page-hero{height:380px;}
+  .festival-card{padding:32px 20px;}
+  .footer-bottom{flex-direction:column;text-align:center;}
+  .slide-track img{width:240px;height:170px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner d-flex align-items-center justify-content-between">
+    <div class="d-flex align-items-center gap-3">
+      <img src="image/logo.png" alt="Bukidnon Logo" class="site-logo">
+      <div>
+        <p class="header-sub mb-0">REPUBLIC OF THE PHILIPPINES</p>
+        <h1 class="header-title mb-0">PROVINCIAL GOVERNMENT OF BUKIDNON</h1>
+      </div>
+    </div>
+    <button class="hamburger-btn d-xl-none" id="hamburgerBtn" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ══ NAV ══ -->
+<nav class="main-nav" id="mainNav">
+  <div class="nav-inner d-flex align-items-center px-3">
+    <ul class="nav-list d-flex align-items-stretch m-0 p-0 flex-wrap">
+
+      <li class="nav-item-custom">
+        <a class="nav-link-custom" href="index.html"><i class="bi bi-house-fill me-1"></i>Home</a>
+      </li>
+
+      <li class="nav-item-custom">
+        <a class="nav-link-custom" href="index.html#destinations">Destinations <i class="bi bi-chevron-down nav-chevron"></i></a>
+        <ul class="nav-dropdown">
+          <li><a href="dahilayan-overview.html"><i class="bi bi-wind"></i>Dahilayan Adventure Park</a></li>
+          <li><a href="communal-ranch-overview.html"><i class="bi bi-tree"></i>Communal Ranch</a></li>
+          <li><a href="Camp-Philips.html"><i class="bi bi-pin-map"></i>Camp Philips</a></li>
+          <li><a href="lakeapo-overview.html"><i class="bi bi-droplet"></i>Lake Apo</a></li>
+          <li><a href="capistrano-overview.html"><i class="bi bi-mountain"></i>Mt. Capistrano</a></li>
+        </ul>
+      </li>
+
+      <!-- Page pill -->
+      <li class="nav-item-custom nav-page-label">
+        <span class="nav-section-pill"><i class="bi bi-wind"></i> Dahilayan Adventure Park</span>
+      </li>
+
+      <li class="nav-item-custom" id="nav-overview">
+        <a class="nav-link-custom" href="#overview"><i class="bi bi-binoculars me-1"></i>Overview</a>
+      </li>
+      <li class="nav-item-custom" id="nav-activities">
+        <a class="nav-link-custom" href="#activities"><i class="bi bi-lightning me-1"></i>Activities</a>
+      </li>
+      <li class="nav-item-custom" id="nav-fees">
+        <a class="nav-link-custom" href="#fees"><i class="bi bi-ticket-perforated me-1"></i>Fees</a>
+      </li>
+      <li class="nav-item-custom" id="nav-food">
+        <a class="nav-link-custom" href="#food"><i class="bi bi-cup-hot me-1"></i>Food</a>
+      </li>
+      <li class="nav-item-custom" id="nav-tips">
+        <a class="nav-link-custom" href="#tips"><i class="bi bi-lightbulb me-1"></i>Tips</a>
+      </li>
+      <li class="nav-item-custom" id="nav-festival">
+        <a class="nav-link-custom" href="#festival"><i class="bi bi-stars me-1"></i>Festival</a>
+      </li>
+
+      <li class="nav-item-custom nav-cta">
+        <a class="nav-link-custom" href="index.html#inquiry"><i class="bi bi-envelope-paper me-1"></i>Inquire</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ══ BREADCRUMB ══ -->
+<div class="breadcrumb-bar">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item"><a href="index.html#destinations">Destinations</a></li>
+        <li class="breadcrumb-item active">Dahilayan Adventure Park</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+
+<!-- ══ HERO ══ -->
+<section class="page-hero">
+  <img src="image/overview.jpg" alt="Dahilayan Adventure Park" class="page-hero-bg">
+  <div class="page-hero-overlay">
+    <p class="page-hero-eyebrow"><i class="bi bi-geo-alt-fill"></i> Manolo Fortich, Bukidnon</p>
+    <h1 class="page-hero-title">DAHILAYAN<br>ADVENTURE PARK</h1>
+    <p class="page-hero-sub">Asia's Longest Dual Zipline &middot; Highland Thrills &middot; Cool Mountain Air</p>
+    <div class="d-flex gap-3 flex-wrap justify-content-center mt-4">
+      <a href="#activities" class="btn-gold"><i class="bi bi-lightning-fill me-2"></i>See Activities</a>
+      <a href="#overview"   class="btn-ghost"><i class="bi bi-binoculars me-2"></i>Learn More</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FACTS BAND ══ -->
+<section class="fact-bar">
+  <div class="container-fluid">
+    <div class="row g-0">
+      <div class="col-6 col-md-3 fact-item"><span class="fact-num">1,300m</span><span class="fact-label">Above Sea Level</span></div>
+      <div class="col-6 col-md-3 fact-item"><span class="fact-num">840m</span><span class="fact-label">Dual Zipline Length</span></div>
+      <div class="col-6 col-md-3 fact-item"><span class="fact-num">10+</span><span class="fact-label">Thrilling Attractions</span></div>
+      <div class="col-6 col-md-3 fact-item"><span class="fact-num">18–24°C</span><span class="fact-label">Average Temperature</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PHOTO SLIDER ══ -->
+<section class="slider-section">
+  <div class="slider-label-bar">EXPLORE DAHILAYAN ADVENTURE PARK</div>
+  <div class="slide-track">
+    <img src="image/dahilayan1.jpg" alt="Dahilayan">
+    <img src="image/dahilayan2.jpg" alt="Dahilayan">
+    <img src="image/dahilayan3.jpg" alt="Dahilayan">
+    <img src="image/dahilayan4.jpg" alt="Dahilayan">
+    <img src="image/dahilayan5.jpg" alt="Dahilayan">
+    <img src="image/dahilayan1.jpg" alt="Dahilayan">
+    <img src="image/dahilayan2.jpg" alt="Dahilayan">
+    <img src="image/dahilayan3.jpg" alt="Dahilayan">
+  </div>
+</section>
+
+<!-- ══ OVERVIEW ══ -->
+<section class="section-block" id="overview" style="scroll-margin-top:140px;">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <div class="section-eyebrow">About the Park</div>
+        <h2 class="section-heading">Dahilayan Adventure Park</h2>
+        <div class="section-rule"></div>
+        <p class="section-body">Nestled in the cool highlands of <strong>Manolo Fortich, Bukidnon</strong> at 1,300 meters above sea level, Dahilayan Adventure Park is the Philippines' premier highland adventure destination. It is famous for housing <strong>Asia's longest dual zipline</strong> — an 840-meter flight over lush Bukidnon forests.</p>
+        <p class="section-body mt-3">The park's cool climate — averaging 18–24°C year-round — makes it a refreshing escape from the lowland heat. Whether you're an adrenaline junkie or a family looking for outdoor fun, Dahilayan has something for everyone.</p>
+        <div class="row g-3 mt-3">
+          <div class="col-6"><div class="info-pill"><i class="bi bi-geo-alt-fill"></i>Manolo Fortich, Bukidnon</div></div>
+          <div class="col-6"><div class="info-pill"><i class="bi bi-clock-fill"></i>Open Daily 8AM–5PM</div></div>
+          <div class="col-6"><div class="info-pill"><i class="bi bi-thermometer-half"></i>Cool 18–24°C Climate</div></div>
+          <div class="col-6"><div class="info-pill"><i class="bi bi-people-fill"></i>All Ages Welcome</div></div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div style="position:relative;border-radius:8px;overflow:hidden;">
+          <img src="image/dahilayan2.jpg" alt="Dahilayan" style="width:100%;height:420px;object-fit:cover;border-radius:8px;border:3px solid var(--gold);">
+          <div style="position:absolute;bottom:24px;right:24px;background:var(--gold);color:var(--black);padding:14px 18px;border-radius:6px;box-shadow:0 4px 20px rgba(0,0,0,.3);text-align:center;">
+            <span style="display:block;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;">Asia's</span>
+            <span style="display:block;font-family:var(--font-display);font-size:13px;font-weight:900;letter-spacing:1px;line-height:1.2;">LONGEST<br>DUAL ZIPLINE</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ACTIVITIES ══ -->
+<section class="section-block section-dark" id="activities" style="scroll-margin-top:140px;">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="section-eyebrow light">Things To Do</div>
+      <h2 class="section-heading light">Activities &amp; Attractions</h2>
+      <div class="section-rule mx-auto"></div>
+      <p class="section-intro">From sky-high ziplines to ATV rides and freefall drops — pure adrenaline awaits.</p>
+    </div>
+    <div class="row g-4">
+
+      <div class="col-sm-6 col-lg-4 will-reveal">
+        <div class="activity-card">
+          <div class="activity-header" style="background:linear-gradient(135deg,#1a4a6b,#1e6fa0);">
+            <span class="activity-emoji">🪂</span>
+            <h3 class="activity-name">Dual Zipline</h3>
+          </div>
+          <div class="activity-body">
+            <p><strong>Asia's longest dual zipline</strong> stretches 840 meters across Dahilayan's lush valley. Race side-by-side with a companion at breathtaking speeds for a bird's-eye view of Bukidnon's highland forests.</p>
+            <div class="activity-tags"><span class="tag-gold">⭐ Signature Ride</span><span class="tag-outline">₱400 – ₱600</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-4 will-reveal">
+        <div class="activity-card">
+          <div class="activity-header" style="background:linear-gradient(135deg,#5a3e1b,#9b6b2f);">
+            <span class="activity-emoji">🏍️</span>
+            <h3 class="activity-name">ATV Ride</h3>
+          </div>
+          <div class="activity-body">
+            <p>Hop on an <strong>All-Terrain Vehicle</strong> and conquer rugged forested trails. Routes wind through pine trees and highland terrain — thrilling off-road adventure for teens and adults.</p>
+            <div class="activity-tags"><span class="tag-gold">Off-Road Thrills</span><span class="tag-outline">₱300 – ₱600</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-4 will-reveal">
+        <div class="activity-card">
+          <div class="activity-header" style="background:linear-gradient(135deg,#2e2e2e,#555);">
+            <span class="activity-emoji">⬇️</span>
+            <h3 class="activity-name">Dropzone</h3>
+          </div>
+          <div class="activity-body">
+            <p>A free-fall platform that sends you plummeting toward the valley before a harness snaps you back. Perfect for thrill-seekers who want the <strong>ultimate rush</strong> at Dahilayan.</p>
+            <div class="activity-tags"><span class="tag-gold">Extreme Thrill</span><span class="tag-outline">₱200 – ₱350</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-4 will-reveal">
+        <div class="activity-card">
+          <div class="activity-header" style="background:linear-gradient(135deg,#1a6b4a,#27a06a);">
+            <span class="activity-emoji">🌀</span>
+            <h3 class="activity-name">Gravity Rides</h3>
+          </div>
+          <div class="activity-body">
+            <p>Enjoy the <strong>Sky Bike, Human Gyroscope, and Giant Swing</strong> — each offering a unique way to experience height and speed surrounded by misty mountain views.</p>
+            <div class="activity-tags"><span class="tag-gold">Family Fun</span><span class="tag-outline">₱100 – ₱300</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-4 will-reveal">
+        <div class="activity-card">
+          <div class="activity-header" style="background:linear-gradient(135deg,#4a1a6b,#7a3ea0);">
+            <span class="activity-emoji">🌲</span>
+            <h3 class="activity-name">Forest Trail Walk</h3>
+          </div>
+          <div class="activity-body">
+            <p>Explore lush <strong>pine forest trails</strong> at your own pace. Cool highland air, towering trees, and occasional wildlife sightings offer a peaceful contrast to the park's thrill rides.</p>
+            <div class="activity-tags"><span class="tag-gold">Relaxed Pace</span><span class="tag-outline">Free with Entrance</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-4 will-reveal">
+        <div class="activity-card">
+          <div class="activity-header" style="background:linear-gradient(135deg,#6b4a1a,#a07a3e);">
+            <span class="activity-emoji">⛺</span>
+            <h3 class="activity-name">Camping &amp; Glamping</h3>
+          </div>
+          <div class="activity-body">
+            <p>Spend the night under the stars with <strong>camping and glamping packages</strong>. Wake up to cool mountain air and a stunning sunrise over Bukidnon's misty peaks.</p>
+            <div class="activity-tags"><span class="tag-gold">Overnight Stay</span><span class="tag-outline">₱800 – ₱3,000</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ FEES & SCHEDULE ══ -->
+<section class="section-block section-warm" id="fees" style="scroll-margin-top:140px;">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="section-eyebrow">Admission</div>
+      <h2 class="section-heading">Fees &amp; Schedule</h2>
+      <div class="section-rule mx-auto"></div>
+      <p class="section-intro">Plan your visit with updated 2025 rates and park hours.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-lg-6 will-reveal">
+        <h4 style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--black);margin-bottom:20px;"><i class="bi bi-ticket-perforated-fill text-warning me-2"></i>Entrance &amp; Activity Fees</h4>
+        <div style="border-radius:8px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.10);">
+          <table class="price-table">
+            <thead><tr><th>Activity</th><th>Price</th></tr></thead>
+            <tbody>
+              <tr><td>Entrance Fee (Adult)</td><td><span class="price-badge">₱100</span></td></tr>
+              <tr><td>Entrance Fee (Child)</td><td><span class="price-badge">₱50</span></td></tr>
+              <tr><td>Dual Zipline (840m)</td><td><span class="price-badge">₱400 – ₱600</span></td></tr>
+              <tr><td>ATV Ride (30 mins)</td><td><span class="price-badge">₱300 – ₱600</span></td></tr>
+              <tr><td>Dropzone</td><td><span class="price-badge">₱200 – ₱350</span></td></tr>
+              <tr><td>Sky Bike</td><td><span class="price-badge">₱150</span></td></tr>
+              <tr><td>Giant Swing</td><td><span class="price-badge">₱200</span></td></tr>
+              <tr><td>Human Gyroscope</td><td><span class="price-badge">₱150</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-lg-6 will-reveal">
+        <h4 style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--black);margin-bottom:20px;"><i class="bi bi-clock-fill text-warning me-2"></i>Park Hours &amp; Schedule</h4>
+        <div style="border-radius:8px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.10);">
+          <table class="price-table">
+            <thead><tr><th>Day</th><th>Hours</th></tr></thead>
+            <tbody>
+              <tr><td>Monday – Friday</td><td><span class="price-badge">8:00 AM – 5:00 PM</span></td></tr>
+              <tr><td>Saturday</td><td><span class="price-badge">7:00 AM – 6:00 PM</span></td></tr>
+              <tr><td>Sunday &amp; Holidays</td><td><span class="price-badge">7:00 AM – 6:00 PM</span></td></tr>
+              <tr><td>Last Entry</td><td><span class="price-badge">4:30 PM</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="background:rgba(204,188,82,.1);border:1px solid rgba(204,188,82,.3);border-radius:8px;padding:16px 20px;margin-top:20px;">
+          <p style="font-size:13.5px;color:var(--text-body);margin:0;"><i class="bi bi-info-circle-fill me-2" style="color:var(--gold);"></i><strong>Note:</strong> Fees may vary during peak seasons. Check the official Dahilayan Facebook page before visiting.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOD & RESTAURANTS ══ -->
+<section class="section-block section-dark" id="food" style="scroll-margin-top:140px;">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="section-eyebrow light">Dining</div>
+      <h2 class="section-heading light">Food &amp; Restaurants</h2>
+      <div class="section-rule mx-auto"></div>
+      <p class="section-intro">Refuel with highland comfort food after a day of thrills.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-sm-6 col-lg-3 will-reveal">
+        <div class="info-card" style="background:var(--dark-card);border-top-color:var(--gold);">
+          <div class="info-card-icon">🍲</div>
+          <h3 style="color:var(--white);">Main Restaurant</h3>
+          <p style="color:#aaa;">Filipino comfort food — <strong style="color:var(--gold-light);">bulalo, kare-kare, lechon kawali</strong> — best enjoyed with a highland view and cool Dahilayan breeze.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 will-reveal">
+        <div class="info-card" style="background:var(--dark-card);border-top-color:var(--gold);">
+          <div class="info-card-icon">☕</div>
+          <h3 style="color:var(--white);">Bukidnon Coffee Corner</h3>
+          <p style="color:#aaa;">Locally sourced <strong style="color:var(--gold-light);">Bukidnon highland coffee</strong> and native pastries. A hot cup of barako or arabica pairs perfectly with the mountain air.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 will-reveal">
+        <div class="info-card" style="background:var(--dark-card);border-top-color:var(--gold);">
+          <div class="info-card-icon">🌽</div>
+          <h3 style="color:var(--white);">Roadside Food Stalls</h3>
+          <p style="color:#aaa;">Local vendors outside the park sell <strong style="color:var(--gold-light);">grilled corn, isaw, fishball, and native kakanin</strong> at very affordable prices.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 will-reveal">
+        <div class="info-card" style="background:var(--dark-card);border-top-color:var(--gold);">
+          <div class="info-card-icon">🛍️</div>
+          <h3 style="color:var(--white);">Pasalubong Shop</h3>
+          <p style="color:#aaa;"><strong style="color:var(--gold-light);">Bukidnon delicacies, dried fruits, and handcrafted souvenirs</strong>. Pineapple products and highland coffee make great take-home gifts.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ VISITOR TIPS ══ -->
+<section class="section-block" id="tips" style="scroll-margin-top:140px;">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="section-eyebrow">Before You Go</div>
+      <h2 class="section-heading">Visitor Tips</h2>
+      <div class="section-rule mx-auto"></div>
+      <p class="section-intro">Make the most of your Dahilayan visit with these practical tips.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-sm-6 col-lg-4 will-reveal">
+        <div class="tip-card"><span class="tip-icon">🧥</span><h3>Dress in Layers</h3><p>Dahilayan averages <strong style="color:white;">18–24°C</strong>. Bring a jacket especially for early mornings and evenings on the mountain.</p></div>
+      </div>
+      <div class="col-sm-6 col-lg-4 will-reveal">
+        <div class="tip-card"><span class="tip-icon">⏰</span><h3>Arrive Early</h3><p>Opens at <strong style="color:white;">7:00–8:00 AM</strong>. Early arrival means shorter queues for the zipline and ATV rides on weekends and holidays.</p></div>
+      </div>
+      <div class="col-sm-6 col-lg-4 will-reveal">
+        <div class="tip-card"><span class="tip-icon">👟</span><h3>Wear Proper Shoes</h3><p>Closed-toe shoes are <strong style="color:white;">required</strong> for all rides and trail walks. Flip-flops and sandals are not allowed.</p></div>
+      </div>
+      <div class="col-sm-6 col-lg-4 will-reveal">
+        <div class="tip-card"><span class="tip-icon">🚌</span><h3>How to Get There</h3><p>From <strong style="color:white;">Cagayan de Oro City</strong>, take a bus or van to Manolo Fortich (1.5–2 hrs), then a habal-habal to the park entrance.</p></div>
+      </div>
+      <div class="col-sm-6 col-lg-4 will-reveal">
+        <div class="tip-card"><span class="tip-icon">💳</span><h3>Bring Cash</h3><p>Most rides need <strong style="color:white;">separate ticket purchases</strong>. Budget ₱1,500–₱3,000 per person. ATMs are limited in the area.</p></div>
+      </div>
+      <div class="col-sm-6 col-lg-4 will-reveal">
+        <div class="tip-card"><span class="tip-icon">📵</span><h3>Limited Signal</h3><p>Mobile signal is weak inside. <strong style="color:white;">Download maps offline</strong> before heading up and share your location with someone.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FESTIVAL ══ -->
+<section class="section-block section-dark" id="festival" style="scroll-margin-top:140px;">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-9 will-reveal">
+        <div class="festival-card text-center">
+          <div class="festival-badge">2025</div>
+          <h2 class="festival-title">KAAMULAN FESTIVAL</h2>
+          <p class="festival-dates-txt"><i class="bi bi-calendar-event me-2"></i>March 21 – April 23</p>
+          <div class="festival-rule mx-auto"></div>
+          <p class="festival-desc">Experience the vibrant culture of Bukidnon! Celebrate the rich traditions of Bukidnon's seven indigenous groups — Higaonon, Manobo, Matigsalug, Talaandig, Tigwahanon, and Umayamnon. Don't miss the colorful festivities, cultural performances, and a showcase of indigenous heritage!</p>
+          <div class="festival-hl justify-content-center">
+            <i class="bi bi-star-fill" style="color:var(--gold);flex-shrink:0;"></i>
+            <span><strong>Celebrity Night — April 13:</strong> TJ Monterde &amp; KZ Tandingan</span>
+          </div>
+          <div class="d-flex flex-wrap gap-2 justify-content-center mt-4">
+            <a href="https://www.facebook.com/hashtag/kaamulan2025"     target="_blank" rel="noopener" class="fest-tag">#Kaamulan2025</a>
+            <a href="https://www.facebook.com/hashtag/bukidnon"         target="_blank" rel="noopener" class="fest-tag">#Bukidnon</a>
+            <a href="https://www.facebook.com/hashtag/culturalfestival" target="_blank" rel="noopener" class="fest-tag">#CulturalFestival</a>
+            <a href="https://www.facebook.com/hashtag/dahilayan"        target="_blank" rel="noopener" class="fest-tag">#Dahilayan</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA BANNER ══ -->
+<section style="background:linear-gradient(135deg,var(--gold-dark),var(--gold));padding:60px 0;">
+  <div class="container text-center">
+    <h2 style="font-family:var(--font-display);font-size:clamp(22px,3vw,34px);font-weight:900;color:var(--black);letter-spacing:2px;margin-bottom:12px;">Ready for Your Dahilayan Adventure?</h2>
+    <p style="font-size:15px;color:rgba(0,0,0,.65);margin-bottom:28px;max-width:500px;margin-left:auto;margin-right:auto;">Contact our tourism team and plan your highland trip today.</p>
+    <div class="d-flex gap-3 flex-wrap justify-content-center">
+      <a href="index.html#inquiry" style="display:inline-block;padding:13px 36px;background:var(--black);color:var(--gold);font-family:var(--font-display);font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;border-radius:4px;border:2px solid var(--black);"><i class="bi bi-envelope-fill me-2"></i>Send an Inquiry</a>
+      <a href="index.html#destinations" style="display:inline-block;padding:13px 36px;background:transparent;color:var(--black);font-family:var(--font-display);font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;border-radius:4px;border:2px solid rgba(0,0,0,.4);"><i class="bi bi-compass me-2"></i>More Destinations</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <div class="d-flex align-items-center gap-3 mb-3">
+          <img src="image/logo.png" alt="Logo" class="footer-logo">
+          <div>
+            <p class="footer-province-sub">REPUBLIC OF THE PHILIPPINES</p>
+            <p class="footer-province-name">PROVINCIAL GOVERNMENT<br>OF BUKIDNON</p>
+          </div>
+        </div>
+        <p class="footer-about">All content is in the public domain unless otherwise stated. Promoting sustainable tourism in Bukidnon.</p>
+      </div>
+      <div class="col-sm-6 col-lg-4">
+        <h5 class="footer-heading">Tourist Destinations</h5>
+        <ul class="footer-links">
+          <li><a href="dahilayan-overview.html">Dahilayan Adventure Park</a></li>
+          <li><a href="communal-ranch-overview.html">Communal Ranch</a></li>
+          <li><a href="Camp-Philips.html">Camp Philips</a></li>
+          <li><a href="lakeapo-overview.html">Lake Apo</a></li>
+          <li><a href="capistrano-overview.html">Mt. Capistrano</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-6 col-lg-4">
+        <h5 class="footer-heading">GOV.PH</h5>
+        <ul class="footer-links">
+          <li><a href="https://data.gov.ph/" target="_blank">Open Data Portal</a></li>
+          <li><a href="https://www.officialgazette.gov.ph/" target="_blank">Official Gazette</a></li>
+          <li><a href="https://bukidnon.gov.ph/" target="_blank">Provincial Government</a></li>
+          <li><a href="https://www.tourism.gov.ph/" target="_blank">DOT Philippines</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Provincial Government of Bukidnon. All Rights Reserved.</p>
+      <p><a href="index.html" style="color:#666;">← Back to Homepage</a></p>
+    </div>
+  </div>
+</footer>
+
+<button id="backToTop" class="back-to-top" aria-label="Back to top"><i class="bi bi-arrow-up"></i></button>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Hamburger
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mainNav      = document.getElementById('mainNav');
+  hamburgerBtn?.addEventListener('click', () => {
+    mainNav.classList.toggle('nav-open');
+    hamburgerBtn.classList.toggle('active');
+  });
+
+  // Mobile dropdowns
+  document.querySelectorAll('.nav-item-custom > .nav-link-custom').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const dd = this.nextElementSibling;
+      if (window.innerWidth < 1200 && dd?.classList.contains('nav-dropdown')) {
+        e.preventDefault();
+        const p = this.parentElement, open = p.classList.contains('nav-item-open');
+        document.querySelectorAll('.nav-item-custom').forEach(i => i.classList.remove('nav-item-open'));
+        if (!open) p.classList.add('nav-item-open');
+      }
+    });
+  });
+
+  // Active nav on scroll
+  const SECS = ['overview','activities','fees','food','tips','festival'];
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    SECS.forEach(id => { const el = document.getElementById(id); if (el && window.scrollY >= el.offsetTop - 180) cur = id; });
+    SECS.forEach(id => { const li = document.getElementById('nav-' + id); if (li) li.classList.toggle('nav-item-active', id === cur); });
+  });
+
+  // Header shrink + back to top
+  const siteHeader = document.getElementById('siteHeader');
+  const backToTop  = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    siteHeader.classList.toggle('header-scrolled', window.scrollY > 60);
+    backToTop.classList.toggle('visible', window.scrollY > 400);
+  });
+  backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // Scroll reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); obs.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.will-reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

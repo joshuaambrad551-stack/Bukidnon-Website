@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bukidnon – Heart of Mindanao</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Lato:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link rel="stylesheet" href="styles/index_style.css">
+<style>
+/* ── Destination Search & Filter Controls ── */
+.dest-controls { display: flex; flex-direction: column; gap: 1rem; }
+.dest-search-wrap { position: relative; }
+.dest-search-icon { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: #b89a4e; font-size: 1rem; pointer-events: none; }
+.dest-search-input { width: 100%; padding: .75rem 1rem .75rem 2.75rem; background: rgba(255,255,255,.07); border: 1px solid rgba(184,154,78,.35); border-radius: 8px; color: #fff; font-size: .95rem; transition: border-color .2s, box-shadow .2s; }
+.dest-search-input::placeholder { color: rgba(255,255,255,.4); }
+.dest-search-input:focus { outline: none; border-color: #b89a4e; box-shadow: 0 0 0 3px rgba(184,154,78,.2); }
+.dest-filter-wrap { display: flex; flex-wrap: wrap; gap: .5rem; }
+.dest-filter-btn { padding: .4rem 1rem; border: 1px solid rgba(184,154,78,.5); border-radius: 20px; background: transparent; color: rgba(255,255,255,.7); font-size: .82rem; cursor: pointer; transition: all .2s; }
+.dest-filter-btn:hover { border-color: #b89a4e; color: #b89a4e; }
+.dest-filter-btn.active { background: #b89a4e; border-color: #b89a4e; color: #1a1a1a; font-weight: 600; }
+
+/* ── Destination Modal ── */
+.dest-modal-content { background: #1c1c1c; color: #e0e0e0; border: 1px solid rgba(184,154,78,.3); border-radius: 12px; overflow: hidden; }
+.dest-modal-header { background: #151515; padding: 1rem 1.25rem .5rem; }
+.dest-modal-hero-img { width: 100%; height: 260px; object-fit: cover; }
+.dest-modal-title { font-family: 'Cinzel', serif; color: #d4aa5f; font-size: 1.5rem; margin-bottom: .25rem; }
+.dest-modal-location { color: rgba(255,255,255,.6); font-size: .9rem; margin-bottom: 1rem; }
+.dest-modal-desc { color: rgba(255,255,255,.8); line-height: 1.7; font-size: .92rem; }
+.modal-info-card { display: flex; align-items: flex-start; gap: .75rem; background: rgba(255,255,255,.05); border: 1px solid rgba(184,154,78,.15); border-radius: 8px; padding: .85rem; height: 100%; }
+.modal-info-card > i { font-size: 1.2rem; margin-top: 2px; flex-shrink: 0; }
+.modal-info-label { font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: rgba(255,255,255,.45); margin-bottom: .2rem; }
+.modal-info-value { font-size: .88rem; color: #e0e0e0; }
+.modal-tips-box { background: rgba(184,154,78,.08); border-left: 3px solid #b89a4e; border-radius: 0 8px 8px 0; padding: 1rem 1.25rem; }
+.modal-tips-heading { font-size: .85rem; text-transform: uppercase; letter-spacing: .06em; color: #d4aa5f; margin-bottom: .5rem; }
+.modal-tips-text { font-size: .88rem; color: rgba(255,255,255,.75); margin: 0; line-height: 1.65; }
+
+/* ── Gallery Lightbox ── */
+.lightbox-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.93); z-index: 9999; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity .3s; }
+.lightbox-overlay.active { opacity: 1; pointer-events: all; }
+.lightbox-content { display: flex; flex-direction: column; align-items: center; max-width: 90vw; max-height: 90vh; }
+.lightbox-img { max-width: 100%; max-height: 78vh; object-fit: contain; border-radius: 6px; box-shadow: 0 20px 60px rgba(0,0,0,.7); }
+.lightbox-caption { color: rgba(255,255,255,.7); margin-top: .75rem; font-size: .9rem; text-align: center; }
+.lightbox-close { position: absolute; top: 1.25rem; right: 1.5rem; background: rgba(255,255,255,.1); border: none; color: #fff; font-size: 1.3rem; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .2s; }
+.lightbox-close:hover { background: rgba(255,255,255,.25); }
+.lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,.1); border: none; color: #fff; font-size: 1.4rem; width: 52px; height: 52px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .2s; }
+.lightbox-nav:hover { background: rgba(184,154,78,.5); }
+.lightbox-prev { left: 1.25rem; }
+.lightbox-next { right: 1.25rem; }
+@media (max-width: 576px) { .lightbox-nav { width: 40px; height: 40px; font-size: 1.1rem; } .lightbox-prev { left: .5rem; } .lightbox-next { right: .5rem; } }
+
+/* ── Gallery cursor ── */
+.gallery-item { cursor: zoom-in; }
+
+/* ── Form error visibility ── */
+.form-error { display: none; color: #f87171; font-size: .8rem; margin-top: .3rem; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════ HEADER ══════════════════════ -->
+<header class="site-header">
+  <div class="header-inner d-flex align-items-center justify-content-between px-4">
+    <div class="d-flex align-items-center gap-3">
+      <img src="image/logo.png" alt="Bukidnon Logo" class="site-logo">
+      <div>
+        <p class="header-sub mb-0">REPUBLIC OF THE PHILIPPINES</p>
+        <h1 class="header-title mb-0">PROVINCIAL GOVERNMENT OF BUKIDNON</h1>
+      </div>
+    </div>
+    <button class="hamburger-btn d-xl-none" id="hamburgerBtn" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ══════════════════════ NAV ══════════════════════ -->
+<nav class="main-nav" id="mainNav">
+  <div class="nav-inner d-flex align-items-center justify-content-between px-4">
+    <ul class="nav-list d-flex align-items-stretch m-0 p-0 flex-wrap">
+
+      <li class="nav-item-custom">
+        <a class="nav-link-custom" href="#about">About <i class="bi bi-chevron-down nav-chevron"></i></a>
+        <ul class="nav-dropdown">
+          <li><a href="quickfacts.html"><i class="bi bi-info-circle"></i> Quick Facts</a></li>
+          <li><a href="generalinfo.html"><i class="bi bi-map"></i> General Info</a></li>
+          <li><a href="history.html"><i class="bi bi-book"></i> History</a></li>
+          <li><a href="artsandculture.html"><i class="bi bi-palette"></i> Arts &amp; Culture</a></li>
+        </ul>
+      </li>
+
+      <li class="nav-item-custom">
+        <a class="nav-link-custom" href="#destinations">Tourist Destinations <i class="bi bi-chevron-down nav-chevron"></i></a>
+        <ul class="nav-dropdown">
+          <li><a href="dahilayan-overview.html"><i class="bi bi-wind"></i> Dahilayan Adventure Park</a></li>
+          <li><a href="ranch-overview.html"><i class="bi bi-tree"></i> Communal Ranch</a></li>
+          <li><a href="lakeapo-overview.html"><i class="bi bi-droplet"></i> Lake Apo</a></li>
+          <li><a href="capistrano-overview.html"><i class="bi bi-mountain"></i> Mt. Capistrano</a></li>
+          <li><a href="cedar-overview.html"><i class="bi bi-water"></i> CEDAR Falls</a></li>
+          <li><a href="rr-resort-overview.html"><i class="bi bi-sun"></i> RR Family Spring Resort</a></li>
+        </ul>
+      </li>
+
+      <li class="nav-item-custom">
+        <a class="nav-link-custom" href="artsandculture.html">Festivals &amp; Culture <i class="bi bi-chevron-down nav-chevron"></i></a>
+        <ul class="nav-dropdown">
+          <li><a href="artsandculture.html"><i class="bi bi-stars"></i> Kaamulan Festival</a></li>
+          <li><a href="artsandculture.html"><i class="bi bi-music-note-beamed"></i> Pinamaloy Festival</a></li>
+          <li><a href="artsandculture.html"><i class="bi bi-people"></i> Traditions</a></li>
+        </ul>
+      </li>
+
+      <li class="nav-item-custom">
+        <a class="nav-link-custom" href="delicacies.html">Food &amp; Delicacies <i class="bi bi-chevron-down nav-chevron"></i></a>
+        <ul class="nav-dropdown">
+          <li><a href="delicacies.html"><i class="bi bi-egg-fried"></i> Local Cuisine</a></li>
+          <li><a href="delicacies.html"><i class="bi bi-cup-hot"></i> Native Delicacies</a></li>
+          <li><a href="delicacies.html"><i class="bi bi-basket"></i> Where to Eat</a></li>
+        </ul>
+      </li>
+
+      <li class="nav-item-custom">
+        <a class="nav-link-custom" href="#gallery">Gallery</a>
+      </li>
+
+      <li class="nav-item-custom">
+        <a class="nav-link-custom" href="#travel-tips">Travel Tips <i class="bi bi-chevron-down nav-chevron"></i></a>
+        <ul class="nav-dropdown">
+          <li><a href="#travel-tips"><i class="bi bi-geo-alt"></i> Getting There</a></li>
+          <li><a href="#travel-tips"><i class="bi bi-calendar3"></i> Best Time to Visit</a></li>
+          <li><a href="#travel-tips"><i class="bi bi-house"></i> Accommodations</a></li>
+          <li><a href="#travel-tips"><i class="bi bi-shield-check"></i> Safety Tips</a></li>
+        </ul>
+      </li>
+
+      <li class="nav-item-custom nav-cta">
+        <a class="nav-link-custom" href="#inquiry"><i class="bi bi-envelope-paper"></i> Inquire</a>
+      </li>
+
+    </ul>
+  </div>
+</nav>
+
+<section class="hero-section" id="home">
+
+  <img src="image/bukidnon1.jpg" alt="Bukidnon Highlands" class="hero-bg">
+
+  <div class="hero-overlay">
+
+    <div class="hero-badge">
+      <i class="bi bi-geo-alt-fill"></i> Region X &nbsp;·&nbsp; Northern Mindanao, Philippines
+    </div>
+
+    <p class="hero-province-label">PROVINCE OF</p>
+    <h1 class="hero-heading">BUKIDNON</h1>
+
+    <div class="hero-rule"></div>
+
+    <p class="hero-slogan">
+      "Explore Bukidnon: Discover highlands, festivals,<br class="d-none d-md-block">
+      indigenous culture, nature, and adventure."
+    </p>
+
+    <div class="hero-welcome-box">
+      <p class="hero-welcome-text">
+        Welcome to Bukidnon — the cool, green heart of Mindanao. A land of misty mountains,
+        vibrant indigenous tribes, sprawling pineapple fields, and thrilling adventures awaits you.
+        Come experience a province unlike any other.
+      </p>
+    </div>
+
+    <div class="d-flex gap-3 flex-wrap justify-content-center mt-4">
+      <a href="#destinations" class="btn-gold">
+        <i class="bi bi-compass-fill me-2"></i>Explore Destinations
+      </a>
+      <a href="delicacies.html" class="btn-outline-gold">
+        <i class="bi bi-cup-hot me-2"></i>Explore Flavors
+      </a>
+    </div>
+
+  </div>
+
+  <div class="hero-scroll-hint">
+    <span>Scroll to Explore</span>
+    <i class="bi bi-chevron-double-down"></i>
+  </div>
+
+</section>
+
+<!-- ══════════════════════ STATS BAND ══════════════════════ -->
+<section class="stats-band">
+  <div class="container-fluid">
+    <div class="row g-0">
+      <div class="col-6 col-md-3 stat-item">
+        <span class="stat-num">10</span>
+        <span class="stat-label">Cities &amp; Municipalities</span>
+      </div>
+      <div class="col-6 col-md-3 stat-item">
+        <span class="stat-num">7</span>
+        <span class="stat-label">Indigenous Groups</span>
+      </div>
+      <div class="col-6 col-md-3 stat-item">
+        <span class="stat-num">2,955m</span>
+        <span class="stat-label">Mt. Dulang-Dulang Peak</span>
+      </div>
+      <div class="col-6 col-md-3 stat-item">
+        <span class="stat-num">30+</span>
+        <span class="stat-label">Tourist Attractions</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ DESTINATIONS ══════════════════════ -->
+<section class="section-block section-dark" id="destinations">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="section-eyebrow light">Exploration</div>
+      <h2 class="section-heading light">Must-Visit Places</h2>
+      <div class="section-rule mx-auto"></div>
+    </div>
+
+    <!-- Search & Filter Controls -->
+    <div class="dest-controls mb-4">
+      <div class="dest-search-wrap">
+        <i class="bi bi-search dest-search-icon"></i>
+        <input type="text" id="destSearch" class="dest-search-input" placeholder="Search by name, city, or category…">
+      </div>
+      <div class="dest-filter-wrap" id="destFilters">
+        <button class="dest-filter-btn active" data-filter="All">All</button>
+        <button class="dest-filter-btn" data-filter="Adventure">Adventure</button>
+        <button class="dest-filter-btn" data-filter="Mountain">Mountain</button>
+        <button class="dest-filter-btn" data-filter="Waterfall">Waterfall</button>
+        <button class="dest-filter-btn" data-filter="Beach">Beach</button>
+        <button class="dest-filter-btn" data-filter="Historical Site">Historical Site</button>
+        <button class="dest-filter-btn" data-filter="Island">Island</button>
+      </div>
+    </div>
+
+    <!-- Dynamic Cards Grid -->
+    <div class="row g-4" id="destGrid"></div>
+    <p class="text-center text-white-50 mt-4 d-none" id="noResults">No destinations found. Try a different search or filter.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════ AUTO SLIDER ══════════════════════ -->
+<section class="slider-section">
+  <div class="slider-label-bar">EXPLORE BUKIDNON</div>
+  <div class="slide-track">
+    <img src="image/dahilayan1.jpg" alt="Dahilayan">
+    <img src="image/dahilayan2.jpg" alt="Dahilayan">
+    <img src="image/mt.jpg" alt="Mt. Capistrano">
+    <img src="image/mt1.jpg" alt="Mt. Capistrano View">
+    <img src="image/adventure.jpg" alt="Extreme Adventure">
+    
+    <img src="image/communal1.jpg" alt="Communal Ranch">
+    <img src="image/lake1.jpg" alt="Lake Apo">
+    <img src="image/cedar.jpg" alt="CEDAR Falls">
+    <img src="image/camp1.jpg" alt="Camping Bukidnon">
+    <img src="image/bukidnon1.jpg" alt="Scenic Bukidnon">
+    <img src="image/bukidnon2.jpg" alt="Pineapple Fields">
+
+    <img src="image/beef.jpg" alt="Bukidnon Beef">
+    <img src="image/binaki.jpg" alt="Binaki">
+    <img src="image/coffee.jpg" alt="Bukidnon Coffee">
+    <img src="image/pinakurat.jpg" alt="Pinakurat Vinegar">
+    <img src="image/dahilayanFood1.jpg" alt="Local Food">
+
+    <img src="image/Kaamulan.jpg" alt="Kaamulan Festival">
+    <img src="image/arts-gallary.jpg" alt="Arts Gallery">
+    <img src="image/crafts.jpg" alt="Local Crafts">
+    <img src="image/trival-heritage.jpeg" alt="Tribal Heritage">
+    <img src="image/keychain.jpg" alt="Souvenirs">
+
+    <img src="image/dahilayan1.jpg" alt="Dahilayan">
+    <img src="image/dahilayan2.jpg" alt="Dahilayan">
+    <img src="image/mt.jpg" alt="Mt. Capistrano">
+    <img src="image/communal1.jpg" alt="Communal Ranch">
+    <img src="image/lake1.jpg" alt="Lake Apo">
+    <img src="image/beef.jpg" alt="Bukidnon Beef">
+    <img src="image/binaki.jpg" alt="Binaki">
+    <img src="image/Kaamulan.jpg" alt="Festival">
+    <img src="image/bukidnon1.jpg" alt="Scenic">
+    <img src="image/cedar.jpg" alt="Falls">
+  </div>
+</section>
+
+<!-- ══════════════════════ FESTIVALS ══════════════════════ -->
+<section class="section-block" id="festivals">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="section-eyebrow">Festivals &amp; Culture</div>
+      <h2 class="section-heading">Celebrating Indigenous Heritage</h2>
+      <div class="section-rule mx-auto"></div>
+    </div>
+    <div class="row g-4 align-items-center">
+      <div class="col-lg-6">
+        <div class="festival-feature-card">
+          <div class="festival-year-badge">2025</div>
+          <h3 class="festival-name">KAAMULAN FESTIVAL</h3>
+          <p class="festival-dates-text"><i class="bi bi-calendar-event"></i> March 21 – April 23</p>
+          <div class="festival-rule"></div>
+          <p class="festival-desc">The Kaamulan Festival is the Philippines' only authentic tribal festival, celebrating the rich traditions of Bukidnon's seven indigenous groups. Experience colorful rituals, tribal dances, and a vibrant showcase of indigenous heritage.</p>
+          <div class="festival-highlight mt-3">
+            <i class="bi bi-star-fill"></i>
+            <strong>Celebrity Night — April 13:</strong> TJ Monterde &amp; KZ Tandingan
+          </div>
+          <div class="d-flex flex-wrap gap-2 mt-4">
+            <a href="https://www.facebook.com/hashtag/kaamulan2025" target="_blank" rel="noopener" class="fest-tag">#Kaamulan2025</a>
+            <a href="https://www.facebook.com/hashtag/bukidnon" target="_blank" rel="noopener" class="fest-tag">#Bukidnon</a>
+            <a href="https://www.facebook.com/hashtag/culturalfestival" target="_blank" rel="noopener" class="fest-tag">#CulturalFestival</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="tribe-card">
+              <i class="bi bi-flower1 tribe-icon"></i>
+              <h5>Higaonon</h5>
+              <p>Mountain dwellers known for beadwork and oral literature</p>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="tribe-card">
+              <i class="bi bi-sun tribe-icon"></i>
+              <h5>Manobo</h5>
+              <p>One of the oldest indigenous groups in Mindanao</p>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="tribe-card">
+              <i class="bi bi-water tribe-icon"></i>
+              <h5>Talaandig</h5>
+              <p>Artists and musicians known for gong-playing traditions</p>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="tribe-card">
+              <i class="bi bi-leaf tribe-icon"></i>
+              <h5>Matigsalug</h5>
+              <p>Known for their elaborate rituals and weaving crafts</p>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="tribe-card">
+              <i class="bi bi-wind tribe-icon"></i>
+              <h5>Tigwahanon</h5>
+              <p>River people with deep connections to nature spirits</p>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="tribe-card">
+              <i class="bi bi-globe-asia-australia tribe-icon"></i>
+              <h5>Umayamnon</h5>
+              <p>Highland farmers preserving ancient agricultural rites</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ FOOD & DELICACIES ══════════════════════ -->
+<section class="section-block section-warm" id="food">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="section-eyebrow">Food &amp; Delicacies</div>
+      <h2 class="section-heading">Taste of Bukidnon</h2>
+      <div class="section-rule mx-auto"></div>
+      <p class="section-intro">From highland vegetables to sweet native treats, Bukidnon offers a flavorful culinary journey.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-sm-6 col-lg-3">
+        <div class="food-card">
+          <div class="food-icon-wrap"><i class="bi bi-cup-hot-fill"></i></div>
+          <h4 class="food-name">Sinuglaw</h4>
+          <p class="food-desc">A classic Mindanao dish combining grilled pork and fresh kinilaw — smoky, tangy, and uniquely Mindanaoan.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="food-card">
+          <div class="food-icon-wrap"><i class="bi bi-basket-fill"></i></div>
+          <h4 class="food-name">Bukidnon Pineapple</h4>
+          <p class="food-desc">World-renowned Del Monte pineapples grown in the province's vast plantations — sweet, juicy, and premium quality.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="food-card">
+          <div class="food-icon-wrap"><i class="bi bi-egg-fill"></i></div>
+          <h4 class="food-name">Native Kakanin</h4>
+          <p class="food-desc">Traditional rice cakes and native sweets passed down through indigenous communities, made with local ingredients.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="food-card">
+          <div class="food-icon-wrap"><i class="bi bi-fire"></i></div>
+          <h4 class="food-name">Grilled Corn</h4>
+          <p class="food-desc">Highland corn grilled over charcoal — a simple roadside treat that captures the agricultural spirit of Bukidnon.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ GALLERY ══════════════════════ -->
+<section class="section-block section-dark" id="gallery">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="section-eyebrow light">Gallery</div>
+      <h2 class="section-heading light">Through the Lens</h2>
+      <div class="section-rule mx-auto"></div>
+    </div>
+
+    <div class="gallery-grid mb-5">
+      <div class="gallery-item gallery-tall">
+        <img src="image/bukidnon1.jpg" alt="Bukidnon Landscape">
+        <div class="gallery-caption">Highland Panorama</div>
+      </div>
+      <div class="gallery-item">
+        <img src="image/bukidnon2.jpg" alt="Dahilayan Forest">
+        <div class="gallery-caption">Dahilayan Forest</div>
+      </div>
+      <div class="gallery-item">
+        <img src="image/bukidnon3.jpg" alt="Communal Ranch">
+        <div class="gallery-caption">Communal Ranch</div>
+      </div>
+      <div class="gallery-item gallery-wide">
+        <img src="image/bukidnon4.jpg" alt="Kaamulan Festival">
+        <div class="gallery-caption">Kaamulan Festival</div>
+      </div>
+    </div>
+
+    <div class="text-center">
+      <a href="gallery.html" class="btn btn-outline-gold px-5 py-3 fw-bold text-uppercase tracking-wider">
+        View Full Gallery <i class="bi bi-arrow-right ms-2"></i>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════ TRAVEL TIPS ══════════════════════ -->
+<section class="section-block" id="travel-tips">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="section-eyebrow">Travel Tips</div>
+      <h2 class="section-heading">Plan Your Visit</h2>
+      <div class="section-rule mx-auto"></div>
+    </div>
+    <div class="row g-4">
+
+      <div class="col-md-6 col-lg-3">
+        <div class="tip-card">
+          <div class="tip-icon-wrap"><i class="bi bi-airplane-fill"></i></div>
+          <h4 class="tip-title">Getting There</h4>
+          <ul class="tip-list">
+            <li>Fly to Cagayan de Oro (CDO) or Valencia City</li>
+            <li>Bus routes from CDO to Malaybalay (~2 hrs)</li>
+            <li>Van rentals available at CDO terminal</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3">
+        <div class="tip-card">
+          <div class="tip-icon-wrap"><i class="bi bi-calendar-check-fill"></i></div>
+          <h4 class="tip-title">Best Time to Visit</h4>
+          <ul class="tip-list">
+            <li>March–May: Kaamulan Festival season</li>
+            <li>November–February: Coolest highland weather</li>
+            <li>Avoid heavy rains: July–September</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3">
+        <div class="tip-card">
+          <div class="tip-icon-wrap"><i class="bi bi-house-fill"></i></div>
+          <h4 class="tip-title">Accommodations</h4>
+          <ul class="tip-list">
+            <li>Budget inns in Malaybalay City</li>
+            <li>Eco-lodges near Dahilayan</li>
+            <li>Farm stays in Manolo Fortich</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3">
+        <div class="tip-card">
+          <div class="tip-icon-wrap"><i class="bi bi-shield-check-fill"></i></div>
+          <h4 class="tip-title">Safety Tips</h4>
+          <ul class="tip-list">
+            <li>Bring a jacket — highlands get cold at night</li>
+            <li>Hire registered local guides for treks</li>
+            <li>Respect indigenous sacred sites</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ INQUIRY FORM ══════════════════════ -->
+<section class="section-block section-dark" id="inquiry">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="text-center mb-5">
+          <div class="section-eyebrow light">Inquiry Form</div>
+          <h2 class="section-heading light">Plan Your Bukidnon Adventure</h2>
+          <div class="section-rule mx-auto"></div>
+          <p class="section-intro light">Fill out the form below and our tourism team will get back to you within 24 hours.</p>
+        </div>
+        <div class="inquiry-card">
+          <form id="inquiryForm" novalidate>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label-custom">Full Name *</label>
+                <input type="text" class="form-input-custom" id="fullName" placeholder="Juan dela Cruz" required>
+                <div class="form-error" id="nameError"></div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label-custom">Email Address *</label>
+                <input type="email" class="form-input-custom" id="email" placeholder="juan@email.com" required>
+                <div class="form-error" id="emailError"></div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label-custom">Contact Number</label>
+                <input type="tel" class="form-input-custom" id="phone" placeholder="+63 9XX XXX XXXX">
+                <div class="form-error" id="phoneError"></div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label-custom">Number of Visitors *</label>
+                <select class="form-input-custom" id="visitors" required>
+                  <option value="">Select group size</option>
+                  <option value="1">Solo (1 person)</option>
+                  <option value="2-5">Small Group (2–5)</option>
+                  <option value="6-15">Medium Group (6–15)</option>
+                  <option value="16+">Large Group (16+)</option>
+                </select>
+                <div class="form-error" id="visitorsError"></div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label-custom">Preferred Visit Date *</label>
+                <input type="date" class="form-input-custom" id="visitDate" required>
+                <div class="form-error" id="visitDateError"></div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label-custom">Selected Destination *</label>
+                <select class="form-input-custom" id="interest" required>
+                  <option value="">Select a destination</option>
+                  <option value="lake-apo">Lake Apo (Valencia City)</option>
+                  <option value="dahilayan">Dahilayan Adventure Park (Manolo Fortich)</option>
+                  <option value="communal-ranch">Impasugong Communal Ranch</option>
+                  <option value="mt-capistrano">Mt. Capistrano (Malaybalay City)</option>
+                  <option value="cedar">CEDAR Falls (Impasugong)</option>
+                  <option value="camp-philips">Camp Philips (Manolo Fortich)</option>
+                </select>
+                <div class="form-error" id="interestError"></div>
+              </div>
+              <div class="col-12">
+                <label class="form-label-custom">Message / Special Requests *</label>
+                <textarea class="form-input-custom" id="message" rows="4" placeholder="Tell us about your plans, questions, or special requirements..." required></textarea>
+                <div class="form-error" id="messageError"></div>
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn-gold w-100 btn-lg-custom" id="submitBtn">
+                  <i class="bi bi-send-fill me-2"></i>Send Inquiry
+                </button>
+              </div>
+            </div>
+          </form>
+          <div id="formSuccess" class="form-success-msg d-none">
+            <i class="bi bi-check-circle-fill"></i>
+            <h4>Inquiry Sent Successfully!</h4>
+            <p>Thank you! Our tourism team will contact you within 24 hours. <em>Salamat sa inyong interes sa Bukidnon!</em></p>
+          </div>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="row g-3 mt-3">
+          <div class="col-sm-4">
+            <div class="contact-info-card">
+              <i class="bi bi-telephone-fill"></i>
+              <span>(088) 813-5500</span>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="contact-info-card">
+              <i class="bi bi-envelope-fill"></i>
+              <span>tourism@bukidnon.gov.ph</span>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="contact-info-card">
+              <i class="bi bi-geo-alt-fill"></i>
+              <span>Malaybalay City, Bukidnon</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ DESTINATION DETAIL MODAL ══════════════════════ -->
+<div class="modal fade" id="destModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content dest-modal-content">
+      <div class="modal-header dest-modal-header border-0 pb-0">
+        <span class="badge bg-gold text-dark me-2" id="modalCategory"></span>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body dest-modal-body p-0">
+        <img id="modalImg" src="" alt="" class="dest-modal-hero-img">
+        <div class="p-4">
+          <h3 class="dest-modal-title" id="modalTitle"></h3>
+          <p class="dest-modal-location"><i class="bi bi-geo-alt-fill text-gold"></i> <span id="modalLocation"></span></p>
+          <p class="dest-modal-desc" id="modalDesc"></p>
+
+          <div class="row g-3 mt-1">
+            <div class="col-sm-6">
+              <div class="modal-info-card">
+                <i class="bi bi-activity text-gold"></i>
+                <div>
+                  <div class="modal-info-label">Activities</div>
+                  <div class="modal-info-value" id="modalActivities"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="modal-info-card">
+                <i class="bi bi-calendar-check text-gold"></i>
+                <div>
+                  <div class="modal-info-label">Best Time to Visit</div>
+                  <div class="modal-info-value" id="modalBestTime"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="modal-info-card">
+                <i class="bi bi-cash-stack text-gold"></i>
+                <div>
+                  <div class="modal-info-label">Entrance Fee</div>
+                  <div class="modal-info-value" id="modalFee"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="modal-info-card">
+                <i class="bi bi-clock text-gold"></i>
+                <div>
+                  <div class="modal-info-label">Opening Hours</div>
+                  <div class="modal-info-value" id="modalHours"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-tips-box mt-4">
+            <h6 class="modal-tips-heading"><i class="bi bi-lightbulb-fill text-gold me-2"></i>Travel Tips</h6>
+            <p class="modal-tips-text" id="modalTips"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════ GALLERY LIGHTBOX ══════════════════════ -->
+<div id="lightbox" class="lightbox-overlay" role="dialog" aria-modal="true" aria-label="Image lightbox">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close lightbox"><i class="bi bi-x-lg"></i></button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous image"><i class="bi bi-chevron-left"></i></button>
+  <div class="lightbox-content">
+    <img id="lightboxImg" src="" alt="" class="lightbox-img">
+    <p class="lightbox-caption" id="lightboxCaption"></p>
+  </div>
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next image"><i class="bi bi-chevron-right"></i></button>
+</div>
+
+<!-- ══════════════════════ FOOTER ══════════════════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <div class="d-flex align-items-center gap-3 mb-3">
+          <img src="image/logo.png" alt="Logo" class="footer-logo">
+          <div>
+            <p class="footer-province-sub">REPUBLIC OF THE PHILIPPINES</p>
+            <p class="footer-province-name">PROVINCIAL GOVERNMENT<br>OF BUKIDNON</p>
+          </div>
+        </div>
+        <p class="footer-about">All content is in the public domain unless otherwise stated. Promoting sustainable tourism in Bukidnon.</p>
+        <div class="d-flex gap-3 mt-3">
+          <a href="#" class="social-btn"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="social-btn"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="social-btn"><i class="bi bi-youtube"></i></a>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-2">
+        <h5 class="footer-heading">Explore</h5>
+        <ul class="footer-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#destinations">Destinations</a></li>
+          <li><a href="#festivals">Festivals</a></li>
+          <li><a href="#food">Food</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <h5 class="footer-heading">Government Links</h5>
+        <ul class="footer-links">
+          <li><a href="https://bukidnon.gov.ph" target="_blank">Provincial Government</a></li>
+          <li><a href="https://data.gov.ph/" target="_blank">Open Data Portal</a></li>
+          <li><a href="https://www.officialgazette.gov.ph/" target="_blank">Official Gazette</a></li>
+          <li><a href="https://www.tourism.gov.ph/" target="_blank">DOT Philippines</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-3">
+        <h5 class="footer-heading">Visit Us</h5>
+        <ul class="footer-links">
+          <li><i class="bi bi-geo-alt-fill text-gold me-2"></i>Capitol Drive, Malaybalay City</li>
+          <li><i class="bi bi-telephone-fill text-gold me-2"></i>(088) 813-5500</li>
+          <li><i class="bi bi-envelope-fill text-gold me-2"></i>tourism@bukidnon.gov.ph</li>
+          <li><i class="bi bi-clock-fill text-gold me-2"></i>Mon – Fri: 8AM – 5PM</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Provincial Government of Bukidnon. All Rights Reserved.</p>
+      <p>Designed for academic purposes.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Back to Top -->
+<button id="backToTop" class="back-to-top" aria-label="Back to top">
+  <i class="bi bi-arrow-up"></i>
+</button>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+// ════════════════════════════════════════════════════════════
+// 1. DESTINATION DATA ARRAY
+// ════════════════════════════════════════════════════════════
+const destinations = [
+  {
+    id: 1,
+    name: "Dahilayan Adventure Park",
+    municipality: "Manolo Fortich",
+    category: "Adventure",
+    image: "image/dahilayan1.jpg",
+    hours: "8:00 AM – 5:00 PM",
+    fee: "₱50 – ₱100 (entrance); rides extra",
+    shortDesc: "Home to Asia's longest dual zipline and a variety of extreme forest adventures for the whole family.",
+    fullDesc: "Dahilayan Adventure Park in Manolo Fortich is one of the Philippines' premier highland adventure destinations. Sitting at about 1,500 meters above sea level, the park offers breathtaking views of Bukidnon's rolling hills and pine forests. It is best known for housing Asia's longest dual zipline, stretching over 840 meters, as well as a forest adventure course, cable cars, and extreme rides.",
+    activities: "Zipline, Forest Adventure Course, Cable Car, Extreme Rides, Nature Walk",
+    bestTime: "November – May (coolest and driest months)",
+    tips: "Book online in advance especially during weekends and holidays. Wear closed-toe shoes for all rides. Bring a light jacket as it gets cold at altitude. Arrive early to beat the crowds and enjoy the morning mist."
+  },
+  {
+    id: 2,
+    name: "Communal Ranch",
+    municipality: "Impasugong",
+    category: "Mountain",
+    image: "image/communal1.jpg",
+    hours: "6:00 AM – 6:00 PM",
+    fee: "₱20",
+    shortDesc: "The 'New Zealand of Bukidnon,' offering cinematic mountain views and horseback riding experiences.",
+    fullDesc: "The Impasugong Communal Ranch is a sprawling highland pasture often called the 'New Zealand of Bukidnon' for its lush green hills that resemble a European countryside. The ranch spans hundreds of hectares of rolling grasslands, with thousands of cattle grazing freely. It is a photographer's paradise and a perfect spot for a peaceful highland retreat.",
+    activities: "Horseback Riding, Photography, Nature Walk, Cattle Watching, Picnic",
+    bestTime: "Year-round; mornings for the best fog-draped scenery",
+    tips: "Visit early morning (around 6–8 AM) to catch the low-hanging mist over the hills. The entrance fee is minimal. Bring your own food and drinks. Respect the cattle and stay on designated paths."
+  },
+  {
+    id: 3,
+    name: "Lake Apo",
+    municipality: "Valencia City",
+    category: "Adventure",
+    image: "image/lake1.jpg",
+    hours: "Open 24 hours",
+    fee: "₱50",
+    shortDesc: "A serene crater lake perfect for floating bamboo rafting and enjoying the peaceful highland breeze.",
+    fullDesc: "Lake Apo is a stunning volcanic crater lake located in Valencia City, Bukidnon. It is one of the most peaceful and scenic destinations in the province, surrounded by lush forests and farmlands. The lake is famous for its tranquil waters and the unique bamboo raft experience, where visitors can float across the calm surface and enjoy the surrounding highland views.",
+    activities: "Bamboo Rafting, Swimming, Fishing, Camping, Bird Watching, Photography",
+    bestTime: "November – April (dry season for clearer water and calmer conditions)",
+    tips: "Hire a local guide for bamboo rafting. Bring sunscreen and insect repellent. Camping overnight is possible — coordinate with the local barangay for permits. Do not litter to help preserve the lake's ecosystem."
+  },
+  {
+    id: 4,
+    name: "Mt. Capistrano",
+    municipality: "Malaybalay City",
+    category: "Mountain",
+    image: "image/mt.jpg",
+    hours: "4:00 AM (recommended start)",
+    fee: "₱20 – ₱50",
+    shortDesc: "Famous for its unique rock formations and a 360-degree view of the province's rolling mountains.",
+    fullDesc: "Mount Capistrano, also known as Mt. Musuan, is an ancient volcano located in Malaybalay City. Rising about 646 meters above sea level, it is one of the most accessible trekking spots in Bukidnon. The mountain features a distinct steep cone shape, unique rock formations, and diverse flora. From its summit, trekkers are rewarded with a sweeping 360-degree panorama of Bukidnon's valleys and mountain ranges.",
+    activities: "Trekking, Rock Climbing, Sunrise Viewing, Photography, Nature Study",
+    bestTime: "November – May; start before sunrise for the best summit experience",
+    tips: "Register at the barangay hall before trekking. Hire a local guide — the trail can be slippery. Bring at least 1.5L of water per person. The trek takes 1–2 hours depending on pace. Do not leave trash on the trail."
+  },
+  {
+    id: 5,
+    name: "CEDAR Falls",
+    municipality: "Impasugong",
+    category: "Waterfall",
+    image: "image/cedar.jpg",
+    hours: "8:00 AM – 5:00 PM",
+    fee: "₱20",
+    shortDesc: "Home to three majestic waterfalls: Gantungan, Natigbasan, and Dila Falls, hidden in a reforestation site.",
+    fullDesc: "CEDAR Falls is a natural gem tucked within a reforestation site in Impasugong, Bukidnon. CEDAR stands for Community Environment and Development through Agroforestry and Reforestation. The site features three distinct waterfalls — Gantungan, Natigbasan, and Dila Falls — each with its own unique character and surrounding scenery. The lush forest canopy makes the trek to each fall a refreshing nature experience.",
+    activities: "Waterfall Trekking, Swimming, Photography, Nature Walk, Eco-Tourism",
+    bestTime: "June – December (water volume is highest after rains)",
+    tips: "Wear trekking sandals or old shoes as the trail gets muddy and slippery. Bring a change of clothes if you plan to swim. A local guide is recommended. Respect the reforestation area — do not pick plants or litter."
+  },
+  {
+    id: 6,
+    name: "RR Family Spring Resort",
+    municipality: "Maramag",
+    category: "Beach",
+    image: "image/rr.jpg",
+    hours: "7:00 AM – 9:00 PM",
+    fee: "₱50",
+    shortDesc: "The ultimate 'inland beach' experience in Bukidnon, featuring vast spring-fed pools and a tropical atmosphere.",
+    fullDesc: "RR Family Spring Resort in Maramag is often called Bukidnon's own beach, offering a tropical resort atmosphere far from the coast. The resort features large spring-fed swimming pools with fine sand-lined floors, creating a beach-like ambiance in the middle of the highlands. It is a popular family destination known for its crystal-clear spring water, kid-friendly pools, and festive atmosphere.",
+    activities: "Swimming, Water Play, Family Picnic, Volleyball, Resort Activities",
+    bestTime: "Year-round; best enjoyed on weekdays to avoid large weekend crowds",
+    tips: "Arrive early on weekends as the resort fills up quickly. Bring your own food or purchase from the resort's canteen. Lifeguards are on duty but always supervise children near the water. Locker and cottage rentals are available."
+  }
+];
+
+// ════════════════════════════════════════════════════════════
+// 2. RENDER DESTINATION CARDS DYNAMICALLY
+// ════════════════════════════════════════════════════════════
+function renderCards(list) {
+  const grid = document.getElementById('destGrid');
+  const noResults = document.getElementById('noResults');
+  grid.innerHTML = '';
+
+  if (list.length === 0) {
+    noResults.classList.remove('d-none');
+    return;
+  }
+  noResults.classList.add('d-none');
+
+  list.forEach(dest => {
+    const col = document.createElement('div');
+    col.className = 'col-md-6 col-lg-4';
+    col.innerHTML = `
+      <div class="dest-card h-100 will-reveal">
+        <span class="badge bg-gold text-dark position-absolute m-3" style="z-index:2;">${dest.category}</span>
+        <div class="dest-img-container">
+          <img src="${dest.image}" alt="${dest.name}" class="dest-img" loading="lazy">
+        </div>
+        <div class="dest-body">
+          <h3 class="dest-title">${dest.name}</h3>
+          <p class="dest-location"><i class="bi bi-geo-alt"></i> ${dest.municipality}</p>
+          <div class="d-flex justify-content-between small text-white-50 mb-3 border-bottom border-secondary pb-2">
+            <span><i class="bi bi-clock"></i> ${dest.hours}</span>
+            <span><i class="bi bi-cash"></i> ${dest.fee}</span>
+          </div>
+          <p class="dest-desc">${dest.shortDesc}</p>
+          <button class="btn btn-outline-gold btn-sm w-100 dest-view-btn" data-id="${dest.id}">
+            <i class="bi bi-eye me-1"></i>View Details
+          </button>
+        </div>
+      </div>`;
+    grid.appendChild(col);
+  });
+
+  // Re-observe new cards for scroll reveal
+  document.querySelectorAll('#destGrid .will-reveal').forEach(el => {
+    revealObserver.observe(el);
+  });
+}
+
+// ════════════════════════════════════════════════════════════
+// 3. SEARCH FUNCTION
+// ════════════════════════════════════════════════════════════
+let activeFilter = 'All';
+let searchQuery = '';
+
+function applyFilters() {
+  let result = destinations;
+  if (activeFilter !== 'All') {
+    result = result.filter(d => d.category === activeFilter);
+  }
+  if (searchQuery.trim() !== '') {
+    const q = searchQuery.trim().toLowerCase();
+    result = result.filter(d =>
+      d.name.toLowerCase().includes(q) ||
+      d.municipality.toLowerCase().includes(q) ||
+      d.category.toLowerCase().includes(q)
+    );
+  }
+  renderCards(result);
+}
+
+document.getElementById('destSearch').addEventListener('input', function() {
+  searchQuery = this.value;
+  applyFilters();
+});
+
+// ════════════════════════════════════════════════════════════
+// 4. CATEGORY FILTER
+// ════════════════════════════════════════════════════════════
+document.getElementById('destFilters').addEventListener('click', function(e) {
+  const btn = e.target.closest('.dest-filter-btn');
+  if (!btn) return;
+  document.querySelectorAll('.dest-filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  activeFilter = btn.dataset.filter;
+  applyFilters();
+});
+
+// ════════════════════════════════════════════════════════════
+// 5. DESTINATION DETAILS MODAL
+// ════════════════════════════════════════════════════════════
+const destModal = new bootstrap.Modal(document.getElementById('destModal'));
+
+document.getElementById('destGrid').addEventListener('click', function(e) {
+  const btn = e.target.closest('.dest-view-btn');
+  if (!btn) return;
+  const dest = destinations.find(d => d.id === parseInt(btn.dataset.id));
+  if (!dest) return;
+
+  document.getElementById('modalCategory').textContent  = dest.category;
+  document.getElementById('modalImg').src               = dest.image;
+  document.getElementById('modalImg').alt               = dest.name;
+  document.getElementById('modalTitle').textContent     = dest.name;
+  document.getElementById('modalLocation').textContent  = dest.municipality;
+  document.getElementById('modalDesc').textContent      = dest.fullDesc;
+  document.getElementById('modalActivities').textContent= dest.activities;
+  document.getElementById('modalBestTime').textContent  = dest.bestTime;
+  document.getElementById('modalFee').textContent       = dest.fee;
+  document.getElementById('modalHours').textContent     = dest.hours;
+  document.getElementById('modalTips').textContent      = dest.tips;
+
+  destModal.show();
+});
+
+// ════════════════════════════════════════════════════════════
+// 6. GALLERY LIGHTBOX
+// ════════════════════════════════════════════════════════════
+const galleryImages = [
+  { src: 'image/bukidnon1.jpg',  caption: 'Highland Panorama' },
+  { src: 'image/bukidnon2.jpg',  caption: 'Dahilayan Forest' },
+  { src: 'image/bukidnon3.jpg',  caption: 'Communal Ranch' },
+  { src: 'image/bukidnon4.jpg',  caption: 'Kaamulan Festival' }
+];
+let lightboxIndex = 0;
+
+function openLightbox(index) {
+  lightboxIndex = index;
+  const lb = document.getElementById('lightbox');
+  document.getElementById('lightboxImg').src        = galleryImages[index].src;
+  document.getElementById('lightboxCaption').textContent = galleryImages[index].caption;
+  lb.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = '';
+}
+function lightboxNav(dir) {
+  lightboxIndex = (lightboxIndex + dir + galleryImages.length) % galleryImages.length;
+  document.getElementById('lightboxImg').src        = galleryImages[lightboxIndex].src;
+  document.getElementById('lightboxCaption').textContent = galleryImages[lightboxIndex].caption;
+}
+
+// Attach click to gallery items
+document.querySelector('.gallery-grid')?.addEventListener('click', function(e) {
+  const item = e.target.closest('.gallery-item');
+  if (!item) return;
+  const img = item.querySelector('img');
+  const caption = item.querySelector('.gallery-caption');
+  const idx = galleryImages.findIndex(g => img && g.src === img.getAttribute('src'));
+  openLightbox(idx >= 0 ? idx : 0);
+});
+
+document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+document.getElementById('lightboxPrev').addEventListener('click', () => lightboxNav(-1));
+document.getElementById('lightboxNext').addEventListener('click', () => lightboxNav(1));
+document.getElementById('lightbox').addEventListener('click', function(e) {
+  if (e.target === this) closeLightbox();
+});
+document.addEventListener('keydown', e => {
+  const lb = document.getElementById('lightbox');
+  if (!lb.classList.contains('active')) return;
+  if (e.key === 'Escape')      closeLightbox();
+  if (e.key === 'ArrowLeft')   lightboxNav(-1);
+  if (e.key === 'ArrowRight')  lightboxNav(1);
+});
+
+// ════════════════════════════════════════════════════════════
+// 7. FORM VALIDATION (enhanced)
+// ════════════════════════════════════════════════════════════
+const inquiryForm = document.getElementById('inquiryForm');
+const formSuccess  = document.getElementById('formSuccess');
+
+const formRules = [
+  {
+    id: 'fullName',
+    errorId: 'nameError',
+    msg: 'Full name is required (at least 2 characters).',
+    check: v => v.trim().length >= 2
+  },
+  {
+    id: 'email',
+    errorId: 'emailError',
+    msg: 'Please enter a valid email address.',
+    check: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())
+  },
+  {
+    id: 'phone',
+    errorId: 'phoneError',
+    msg: 'Contact number must contain numbers only.',
+    check: v => v.trim() === '' || /^[\d\s\+\-\(\)]+$/.test(v.trim())
+  },
+  {
+    id: 'interest',
+    errorId: 'interestError',
+    msg: 'Please select a destination.',
+    check: v => v !== ''
+  },
+  {
+    id: 'visitDate',
+    errorId: 'visitDateError',
+    msg: 'Please select a travel date.',
+    check: v => v.trim() !== ''
+  },
+  {
+    id: 'visitors',
+    errorId: 'visitorsError',
+    msg: 'Please select the number of visitors.',
+    check: v => v !== ''
+  },
+  {
+    id: 'message',
+    errorId: 'messageError',
+    msg: 'Please include a message or special request.',
+    check: v => v.trim().length >= 5
+  }
+];
+
+// Live validation on blur
+formRules.forEach(rule => {
+  const el = document.getElementById(rule.id);
+  if (!el) return;
+  el.addEventListener('blur', () => validateField(rule));
+  el.addEventListener('input', () => {
+    if (el.classList.contains('input-error')) validateField(rule);
+  });
+});
+
+function validateField(rule) {
+  const el  = document.getElementById(rule.id);
+  const err = document.getElementById(rule.errorId);
+  if (!el || !err) return true;
+  const ok = rule.check(el.value);
+  el.classList.toggle('input-error', !ok);
+  err.textContent = rule.msg;
+  err.style.display = ok ? 'none' : 'block';
+  return ok;
+}
+
+inquiryForm?.addEventListener('submit', function(e) {
+  e.preventDefault();
+  let valid = true;
+  formRules.forEach(rule => {
+    if (!validateField(rule)) valid = false;
+  });
+  if (valid) {
+    inquiryForm.classList.add('d-none');
+    formSuccess.classList.remove('d-none');
+  }
+});
+
+// ════════════════════════════════════════════════════════════
+// SCROLL REVEAL OBSERVER
+// ════════════════════════════════════════════════════════════
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('revealed');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.10 });
+
+document.querySelectorAll('.tribe-card, .food-card, .tip-card, .gallery-item').forEach(el => {
+  el.classList.add('will-reveal');
+  revealObserver.observe(el);
+});
+
+// ════════════════════════════════════════════════════════════
+// NAV & UTILITY
+// ════════════════════════════════════════════════════════════
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const mainNav      = document.getElementById('mainNav');
+hamburgerBtn?.addEventListener('click', () => {
+  mainNav.classList.toggle('nav-open');
+  hamburgerBtn.classList.toggle('active');
+});
+
+document.querySelectorAll('.nav-item-custom > .nav-link-custom').forEach(link => {
+  link.addEventListener('click', function(e) {
+    const dropdown = this.nextElementSibling;
+    if (window.innerWidth < 1200 && dropdown?.classList.contains('nav-dropdown')) {
+      e.preventDefault();
+      const parent = this.parentElement;
+      const isOpen = parent.classList.contains('nav-item-open');
+      document.querySelectorAll('.nav-item-custom').forEach(i => i.classList.remove('nav-item-open'));
+      if (!isOpen) parent.classList.add('nav-item-open');
+    }
+  });
+});
+
+document.querySelectorAll('.nav-link-custom:not([href="#"])').forEach(link => {
+  link.addEventListener('click', () => {
+    if (window.innerWidth < 1200) {
+      mainNav.classList.remove('nav-open');
+      hamburgerBtn?.classList.remove('active');
+    }
+  });
+});
+
+const backToTop = document.getElementById('backToTop');
+window.addEventListener('scroll', () => {
+  backToTop.classList.toggle('visible', window.scrollY > 400);
+  document.querySelector('.site-header').classList.toggle('header-scrolled', window.scrollY > 60);
+});
+backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+// ── Initial render ───────────────────────────────────────
+renderCards(destinations);
+</script>
+</body>
+</html>

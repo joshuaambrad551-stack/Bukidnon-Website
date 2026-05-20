@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lake Apo – Valencia City, Bukidnon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Lato:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link rel="stylesheet" href="styles/index_style.css">
+<style>
+:root{--gold:#ccbc52;--gold-dark:#a89c38;--gold-light:#e8da7a;--black:#0e0e0e;--dark:#141414;--mid:#222;--dark-card:#1c1c1c;--white:#fff;--off-white:#fafaf5;--warm-bg:#fdf8ef;--text-body:#444;--text-muted:#888;--font-display:'Cinzel',serif;--font-body:'Lato',sans-serif;--header-h:80px;--nav-h:54px;--radius:6px;--transition:.25s ease;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}body{font-family:var(--font-body);background:var(--off-white);color:var(--text-body);overflow-x:hidden;}img{max-width:100%;display:block;}a{text-decoration:none;}
+
+.site-header{position:sticky;top:0;z-index:1200;height:var(--header-h);background:var(--white);border-bottom:3px solid var(--gold);box-shadow:0 2px 18px rgba(0,0,0,.10);transition:height var(--transition);}
+.site-header.header-scrolled{height:64px;}.header-inner{height:100%;padding:0 28px;}
+.site-logo{width:54px;height:54px;border-radius:50%;border:2.5px solid var(--gold);object-fit:cover;transition:width var(--transition),height var(--transition);}
+.header-scrolled .site-logo{width:44px;height:44px;}
+.header-sub{font-size:9px;font-weight:700;letter-spacing:2.5px;color:var(--text-muted);text-transform:uppercase;line-height:1;}
+.header-title{font-family:var(--font-display);font-size:12.5px;font-weight:700;letter-spacing:1px;color:var(--black);line-height:1.35;}
+.hamburger-btn{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:8px;}
+.hamburger-btn span{display:block;width:26px;height:2px;background:var(--black);border-radius:2px;transition:transform .3s,opacity .3s;}
+.hamburger-btn.active span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger-btn.active span:nth-child(2){opacity:0;}
+.hamburger-btn.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.main-nav{background:var(--dark);border-bottom:3px solid var(--gold);position:sticky;top:var(--header-h);z-index:1100;transition:top var(--transition);}
+.header-scrolled~.main-nav{top:64px;}.nav-inner{min-height:var(--nav-h);}.nav-list{list-style:none;}.nav-item-custom{position:relative;}
+.nav-link-custom{display:flex;align-items:center;gap:6px;padding:0 13px;height:var(--nav-h);color:var(--white);font-family:var(--font-display);font-size:10px;letter-spacing:1.1px;text-transform:uppercase;white-space:nowrap;cursor:pointer;transition:background var(--transition),color var(--transition);}
+.nav-link-custom:hover,.nav-item-active .nav-link-custom{background:var(--gold);color:var(--black);}
+.nav-chevron{font-size:11px;transition:transform .3s;}
+.nav-item-custom:hover .nav-chevron,.nav-item-open .nav-chevron{transform:rotate(180deg);}
+.nav-page-label{display:flex;align-items:center;}
+.nav-section-pill{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-display);font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);background:rgba(204,188,82,.10);border:1px solid rgba(204,188,82,.30);border-radius:20px;padding:4px 14px;white-space:nowrap;pointer-events:none;margin:0 6px;}
+.nav-cta .nav-link-custom{background:rgba(204,188,82,.10);border-left:1px solid rgba(204,188,82,.30);color:var(--gold-light);}
+.nav-cta .nav-link-custom:hover{background:var(--gold);color:var(--black);}
+.nav-dropdown{display:none;position:absolute;top:var(--nav-h);left:0;min-width:230px;background:var(--mid);border-top:3px solid var(--gold);list-style:none;box-shadow:0 12px 32px rgba(0,0,0,.4);z-index:999;animation:dropIn .2s ease;}
+.nav-item-custom:hover .nav-dropdown{display:block;}
+@keyframes dropIn{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:translateY(0);}}
+.nav-dropdown li a{display:flex;align-items:center;gap:10px;padding:12px 20px;color:#ccc;font-size:13px;border-bottom:1px solid rgba(255,255,255,.05);transition:background var(--transition),color var(--transition),padding-left var(--transition);}
+.nav-dropdown li:last-child a{border-bottom:none;}
+.nav-dropdown li a:hover{background:var(--gold);color:var(--black);padding-left:28px;font-weight:700;}
+.btn-gold{display:inline-block;padding:13px 34px;background:var(--gold);color:var(--black);font-family:var(--font-display);font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;border-radius:var(--radius);border:2px solid var(--gold);box-shadow:0 6px 28px rgba(204,188,82,.35);transition:background var(--transition),transform .2s;}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-2px);color:var(--black);}
+.btn-ghost{display:inline-block;padding:13px 34px;background:transparent;color:var(--white);font-family:var(--font-display);font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;border-radius:var(--radius);border:2px solid rgba(255,255,255,.5);transition:all var(--transition);}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold-light);transform:translateY(-2px);}
+.page-hero{position:relative;width:100%;height:520px;overflow:hidden;}
+.page-hero-bg{width:100%;height:100%;object-fit:cover;object-position:center;animation:heroZoom 16s ease-in-out infinite alternate;}
+@keyframes heroZoom{from{transform:scale(1);}to{transform:scale(1.06);}}
+.page-hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.1) 0%,rgba(0,0,0,.52) 55%,rgba(0,0,0,.82) 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;}
+.page-hero-eyebrow{font-size:11px;font-weight:700;letter-spacing:5px;color:var(--gold-light);text-transform:uppercase;margin-bottom:14px;animation:fadeDown .8s ease both;}
+.page-hero-title{font-family:var(--font-display);font-size:clamp(40px,7vw,82px);font-weight:900;color:var(--white);letter-spacing:6px;text-shadow:0 6px 40px rgba(0,0,0,.6);line-height:1.05;animation:fadeDown .9s .1s ease both;}
+.page-hero-sub{font-size:13px;letter-spacing:2px;color:rgba(255,255,255,.75);margin-top:16px;text-transform:uppercase;animation:fadeUp .8s .2s ease both;}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.breadcrumb-bar{background:var(--dark);border-bottom:1px solid rgba(255,255,255,.07);padding:10px 0;}
+.breadcrumb-bar .breadcrumb{margin:0;background:none;padding:0;}
+.breadcrumb-bar .breadcrumb-item a{color:var(--gold);font-size:12px;font-weight:700;}
+.breadcrumb-bar .breadcrumb-item.active{color:#aaa;font-size:12px;}
+.breadcrumb-bar .breadcrumb-item+.breadcrumb-item::before{color:#555;}
+.fact-bar{background:var(--gold);}
+.fact-item{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px;border-right:1px solid rgba(0,0,0,.12);text-align:center;}
+.fact-item:last-child{border-right:none;}
+.fact-num{font-family:var(--font-display);font-size:clamp(22px,3.5vw,34px);font-weight:900;color:var(--black);line-height:1;}
+.fact-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(0,0,0,.6);margin-top:5px;}
+.slider-section{overflow:hidden;background:var(--black);}
+.slider-label-bar{font-family:var(--font-display);font-size:10px;letter-spacing:6px;color:var(--gold);text-align:center;padding:22px 0 14px;text-transform:uppercase;}
+.slide-track{display:flex;animation:scroll 28s linear infinite;width:max-content;}
+.slide-track img{width:340px;height:230px;object-fit:cover;flex-shrink:0;border-right:4px solid var(--black);}
+@keyframes scroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+.section-block{padding:80px 0;}.section-dark{background:var(--dark);}.section-warm{background:var(--warm-bg);}
+.section-eyebrow{display:inline-block;font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+.section-eyebrow.light{color:var(--gold-light);}
+.section-heading{font-family:var(--font-display);font-size:clamp(26px,4vw,42px);font-weight:900;color:var(--black);letter-spacing:2px;line-height:1.15;}
+.section-heading.light{color:var(--white);}
+.section-rule{width:56px;height:3px;background:linear-gradient(90deg,var(--gold-dark),var(--gold-light));border-radius:2px;margin:18px 0;}
+.section-intro{font-size:15px;line-height:1.8;color:#999;max-width:620px;margin:0 auto;}
+.section-body{font-size:15.5px;line-height:1.85;color:var(--text-body);}
+.info-pill{background:rgba(204,188,82,.08);border:1px solid rgba(204,188,82,.3);border-radius:30px;padding:8px 16px;font-size:12.5px;font-weight:700;color:var(--gold-dark);display:flex;align-items:center;gap:8px;}
+.info-card{background:var(--white);border-radius:var(--radius);border-top:4px solid var(--gold);box-shadow:0 4px 20px rgba(0,0,0,.08);padding:32px 24px;text-align:center;height:100%;transition:transform .3s,box-shadow .3s;}
+.info-card:hover{transform:translateY(-5px);box-shadow:0 12px 32px rgba(0,0,0,.14);}
+.info-card-icon{font-size:44px;margin-bottom:16px;}
+.info-card h3{font-family:var(--font-display);font-size:14px;font-weight:700;letter-spacing:1px;color:var(--black);margin-bottom:10px;}
+.info-card p{font-size:13.5px;line-height:1.8;color:#555;margin:0;}
+.env-card{background:var(--white);border-radius:var(--radius);border-left:5px solid #27a06a;box-shadow:0 4px 18px rgba(0,0,0,.08);padding:28px 24px;text-align:center;height:100%;transition:transform .3s,border-color .3s;}
+.env-card:hover{transform:translateY(-4px);border-color:var(--gold);}
+.env-icon{font-size:40px;margin-bottom:14px;display:block;}
+.env-card h3{font-family:var(--font-display);font-size:13px;font-weight:700;letter-spacing:1px;color:var(--black);margin-bottom:10px;}
+.env-card p{font-size:13.5px;line-height:1.8;color:#555;margin:0;}
+.tip-card{background:var(--black);border-radius:var(--radius);border-top:4px solid var(--gold);box-shadow:0 4px 20px rgba(0,0,0,.25);padding:28px 24px;text-align:center;height:100%;transition:transform .3s;}
+.tip-card:hover{transform:translateY(-4px);}
+.tip-icon{font-size:36px;margin-bottom:12px;display:block;}
+.tip-card h3{font-family:var(--font-display);font-size:13px;font-weight:700;letter-spacing:1px;color:var(--gold);margin-bottom:10px;}
+.tip-card p{font-size:13.5px;line-height:1.8;color:#bbb;margin:0;}
+.product-card{background:var(--dark-card);border-radius:var(--radius);border-bottom:4px solid var(--gold);padding:28px 24px;text-align:center;height:100%;transition:transform .3s,box-shadow .3s;}
+.product-card:hover{transform:translateY(-5px);box-shadow:0 12px 32px rgba(0,0,0,.4);}
+.product-icon{font-size:44px;margin-bottom:16px;display:block;}
+.product-card h3{font-family:var(--font-display);font-size:14px;font-weight:700;letter-spacing:1px;color:var(--white);margin-bottom:10px;}
+.product-card p{font-size:13.5px;line-height:1.8;color:#aaa;margin:0;}
+.festival-card{background:linear-gradient(135deg,#1a1a0a,#2b2b00);border:1px solid rgba(204,188,82,.3);border-radius:8px;padding:48px 40px;}
+.festival-badge{display:inline-block;background:var(--gold);color:var(--black);font-family:var(--font-display);font-size:11px;font-weight:900;letter-spacing:4px;padding:5px 20px;border-radius:20px;margin-bottom:18px;}
+.festival-title-txt{font-family:var(--font-display);font-size:clamp(24px,4vw,38px);font-weight:900;letter-spacing:3px;color:var(--white);margin-bottom:10px;}
+.festival-dates-txt{font-size:13px;font-weight:700;letter-spacing:2px;color:var(--gold);text-transform:uppercase;}
+.festival-rule{width:50px;height:2px;background:var(--gold);border-radius:2px;margin:22px auto;}
+.festival-desc{font-size:15px;line-height:1.85;color:#bbb;}
+.festival-hl{background:rgba(204,188,82,.1);border-left:3px solid var(--gold);padding:12px 18px;border-radius:0 4px 4px 0;font-size:14px;color:var(--gold-light);margin-top:20px;display:flex;align-items:center;gap:10px;}
+.fest-tag{display:inline-block;padding:5px 14px;background:rgba(204,188,82,.15);border:1px solid rgba(204,188,82,.3);color:var(--gold-light);font-size:12px;font-weight:700;border-radius:20px;transition:background var(--transition),color var(--transition),transform .2s;}
+.fest-tag:hover{background:var(--gold);border-color:var(--gold);color:var(--black);transform:translateY(-2px);}
+.site-footer{background:var(--black);border-top:3px solid var(--gold);padding:56px 0 0;color:var(--white);}
+.footer-logo{width:48px;height:48px;border-radius:50%;border:2px solid var(--gold);object-fit:cover;}
+.footer-province-sub{font-size:8.5px;font-weight:700;letter-spacing:2px;color:var(--text-muted);text-transform:uppercase;margin-bottom:2px;}
+.footer-province-name{font-family:var(--font-display);font-size:10.5px;font-weight:700;color:var(--white);letter-spacing:.5px;line-height:1.4;}
+.footer-about{font-size:13px;line-height:1.75;color:#888;margin:0;}
+.footer-heading{font-family:var(--font-display);font-size:11px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:16px;font-weight:700;}
+.footer-links{list-style:none;padding:0;margin:0;}
+.footer-links li,.footer-links li a{font-size:13px;line-height:1.7;color:#888;display:flex;align-items:center;padding:3px 0;transition:color .2s;}
+.footer-links li a:hover{color:var(--gold-light);}
+.footer-bottom{margin-top:40px;border-top:1px solid rgba(255,255,255,.07);padding:18px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;}
+.footer-bottom p{font-size:12px;color:#555;margin:0;}
+.back-to-top{position:fixed;bottom:32px;right:28px;z-index:900;width:44px;height:44px;background:var(--gold);color:var(--black);border:none;border-radius:50%;font-size:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 20px rgba(204,188,82,.45);opacity:0;transform:translateY(20px);transition:opacity .3s,transform .3s;pointer-events:none;}
+.back-to-top.visible{opacity:1;transform:translateY(0);pointer-events:auto;}
+.back-to-top:hover{background:var(--gold-light);}
+.will-reveal{opacity:0;transform:translateY(28px);transition:opacity .55s ease,transform .55s ease;}
+.will-reveal.revealed{opacity:1;transform:translateY(0);}
+@media(max-width:1199.98px){.hamburger-btn{display:flex;}.main-nav{position:fixed;top:var(--header-h);left:0;right:0;max-height:0;overflow:hidden;overflow-y:auto;transition:max-height .4s ease;border-bottom:none;}.main-nav.nav-open{max-height:calc(100vh - var(--header-h));border-bottom:3px solid var(--gold);}.nav-inner{flex-direction:column;align-items:stretch;padding:0;}.nav-list{flex-direction:column;}.nav-link-custom{height:50px;padding:0 20px;}.nav-dropdown{position:static;box-shadow:none;border-top:1px solid rgba(255,255,255,.06);animation:none;background:#1a1a1a;display:none;}.nav-item-open .nav-dropdown{display:block;}.nav-page-label{padding:8px 20px;}}
+@media(max-width:767.98px){.section-block{padding:56px 0;}.page-hero{height:380px;}.festival-card{padding:32px 20px;}.footer-bottom{flex-direction:column;text-align:center;}.slide-track img{width:240px;height:170px;}}
+</style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner d-flex align-items-center justify-content-between">
+    <div class="d-flex align-items-center gap-3">
+      <img src="image/logo.png" alt="Bukidnon Logo" class="site-logo">
+      <div>
+        <p class="header-sub mb-0">REPUBLIC OF THE PHILIPPINES</p>
+        <h1 class="header-title mb-0">PROVINCIAL GOVERNMENT OF BUKIDNON</h1>
+      </div>
+    </div>
+    <button class="hamburger-btn d-xl-none" id="hamburgerBtn" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ══ NAV ══ -->
+<nav class="main-nav" id="mainNav">
+  <div class="nav-inner d-flex align-items-center px-3">
+    <ul class="nav-list d-flex align-items-stretch m-0 p-0 flex-wrap">
+
+      <li class="nav-item-custom">
+        <a class="nav-link-custom" href="index.html"><i class="bi bi-house-fill me-1"></i>Home</a>
+      </li>
+
+      <li class="nav-item-custom">
+        <a class="nav-link-custom" href="index.html#destinations">Destinations <i class="bi bi-chevron-down nav-chevron"></i></a>
+        <ul class="nav-dropdown">
+          <li><a href="dahilayan-overview.html"><i class="bi bi-wind"></i>Dahilayan Adventure Park</a></li>
+          <li><a href="communal-ranch-overview.html"><i class="bi bi-tree"></i>Communal Ranch</a></li>
+          <li><a href="Camp-Philips.html"><i class="bi bi-pin-map"></i>Camp Philips</a></li>
+          <li><a href="lakeapo-overview.html"><i class="bi bi-droplet"></i>Lake Apo</a></li>
+          <li><a href="capistrano-overview.html"><i class="bi bi-mountain"></i>Mt. Capistrano</a></li>
+        </ul>
+      </li>
+
+      <li class="nav-item-custom nav-page-label">
+        <span class="nav-section-pill"><i class="bi bi-droplet"></i> Lake Apo</span>
+      </li>
+
+      <li class="nav-item-custom" id="nav-overview">
+        <a class="nav-link-custom" href="#overview"><i class="bi bi-binoculars me-1"></i>Overview</a>
+      </li>
+      <li class="nav-item-custom" id="nav-history">
+        <a class="nav-link-custom" href="#history"><i class="bi bi-book me-1"></i>History</a>
+      </li>
+      <li class="nav-item-custom" id="nav-wildlife">
+        <a class="nav-link-custom" href="#wildlife"><i class="bi bi-feather me-1"></i>Wildlife</a>
+      </li>
+      <li class="nav-item-custom" id="nav-architecture">
+        <a class="nav-link-custom" href="#architecture"><i class="bi bi-building me-1"></i>Architecture</a>
+      </li>
+      <li class="nav-item-custom" id="nav-products">
+        <a class="nav-link-custom" href="#products"><i class="bi bi-basket me-1"></i>Products</a>
+      </li>
+      <li class="nav-item-custom" id="nav-tips">
+        <a class="nav-link-custom" href="#tips"><i class="bi bi-lightbulb me-1"></i>Tips</a>
+      </li>
+      <li class="nav-item-custom" id="nav-festival">
+        <a class="nav-link-custom" href="#festival"><i class="bi bi-stars me-1"></i>Festival</a>
+      </li>
+
+      <li class="nav-item-custom nav-cta">
+        <a class="nav-link-custom" href="index.html#inquiry"><i class="bi bi-envelope-paper me-1"></i>Inquire</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ══ BREADCRUMB ══ -->
+<div class="breadcrumb-bar">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item"><a href="index.html#destinations">Destinations</a></li>
+        <li class="breadcrumb-item active">Lake Apo</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+
+<!-- ══ HERO ══ -->
+<section class="page-hero">
+  <img src="image/lake.jpg" alt="Lake Apo Bukidnon" class="page-hero-bg">
+  <div class="page-hero-overlay">
+    <p class="page-hero-eyebrow"><i class="bi bi-geo-alt-fill"></i> Valencia City, Bukidnon</p>
+    <h1 class="page-hero-title">LAKE APO</h1>
+    <p class="page-hero-sub">Sacred Crater Lake &middot; Rare Birds &middot; Highland Coffee &middot; Indigenous Culture</p>
+    <div class="d-flex gap-3 flex-wrap justify-content-center mt-4">
+      <a href="#overview"  class="btn-gold"><i class="bi bi-compass-fill me-2"></i>Explore the Lake</a>
+      <a href="#wildlife" class="btn-ghost"><i class="bi bi-feather me-2"></i>See Wildlife</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FACTS BAND ══ -->
+<section class="fact-bar">
+  <div class="container-fluid">
+    <div class="row g-0">
+      <div class="col-6 col-md-3 fact-item"><span class="fact-num">900m+</span><span class="fact-label">Above Sea Level</span></div>
+      <div class="col-6 col-md-3 fact-item"><span class="fact-num">Crater</span><span class="fact-label">Volcanic Origin</span></div>
+      <div class="col-6 col-md-3 fact-item"><span class="fact-num">50+</span><span class="fact-label">Bird Species</span></div>
+      <div class="col-6 col-md-3 fact-item"><span class="fact-num">Sacred</span><span class="fact-label">Higaonon Heritage Site</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PHOTO SLIDER ══ -->
+<section class="slider-section">
+  <div class="slider-label-bar">EXPLORE LAKE APO</div>
+  <div class="slide-track">
+    <img src="image/lake1.jpg" alt="Lake Apo">
+    <img src="image/lake2.jpg" alt="Lake Apo">
+    <img src="image/lake3.jpg" alt="Lake Apo">
+    <img src="image/lake4.jpg" alt="Lake Apo">
+    <img src="image/lake5.jpg" alt="Lake Apo">
+    <img src="image/lake1.jpg" alt="Lake Apo">
+    <img src="image/lake2.jpg" alt="Lake Apo">
+    <img src="image/lake3.jpg" alt="Lake Apo">
+  </div>
+</section>
+
+<!-- ══ OVERVIEW ══ -->
+<section class="section-block" id="overview" style="scroll-margin-top:140px;">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <div class="section-eyebrow">About the Lake</div>
+        <h2 class="section-heading">Lake Apo Overview</h2>
+        <div class="section-rule"></div>
+        <p class="section-body"><strong>Lake Apo</strong> is a pristine volcanic crater lake nestled in the highlands of <strong>Valencia City, Bukidnon</strong>, sitting at over 900 meters above sea level. Surrounded by dense forests and known for its striking emerald-green waters, it is one of Mindanao's most breathtaking natural attractions.</p>
+        <p class="section-body mt-3">The lake holds deep <strong>cultural and spiritual significance</strong> for the Higaonon people, who have lived alongside its shores for generations. Its unique ecosystem supports rare endemic species, making it both a nature lover's paradise and a living cultural heritage site that continues to inspire wonder and reverence.</p>
+        <div class="row g-3 mt-3">
+          <div class="col-6"><div class="info-pill"><i class="bi bi-geo-alt-fill"></i>Valencia City, Bukidnon</div></div>
+          <div class="col-6"><div class="info-pill"><i class="bi bi-droplet-fill"></i>Volcanic Crater Lake</div></div>
+          <div class="col-6"><div class="info-pill"><i class="bi bi-shield-check-fill"></i>Protected Natural Area</div></div>
+          <div class="col-6"><div class="info-pill"><i class="bi bi-cup-hot-fill"></i>Famous for Lake Apo Coffee</div></div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="row g-3">
+          <div class="col-6"><img src="image/lake2.jpg" alt="Lake Apo" style="width:100%;height:200px;object-fit:cover;border-radius:8px;border:2px solid var(--gold);"></div>
+          <div class="col-6"><img src="image/lake3.jpg" alt="Lake Apo" style="width:100%;height:200px;object-fit:cover;border-radius:8px;border:2px solid var(--gold);"></div>
+          <div class="col-12"><img src="image/lake4.jpg" alt="Lake Apo" style="width:100%;height:200px;object-fit:cover;border-radius:8px;border:2px solid var(--gold);"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ HISTORY ══ -->
+<section class="section-block section-dark" id="history" style="scroll-margin-top:140px;">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="section-eyebrow light">Heritage &amp; Culture</div>
+      <h2 class="section-heading light">History of Lake Apo</h2>
+      <div class="section-rule mx-auto"></div>
+      <p class="section-intro">Lake Apo's story is deeply woven into the lives and spirituality of the Higaonon people of Bukidnon.</p>
+    </div>
+    <div class="row g-4">
+
+      <div class="col-sm-6 col-lg-3 will-reveal">
+        <div class="env-card" style="background:var(--dark-card);border-left-color:var(--gold);">
+          <span class="env-icon">👑</span>
+          <h3 style="color:var(--white);">Sacred to the Higaonon</h3>
+          <p style="color:#aaa;">Lake Apo is considered a <strong style="color:var(--gold-light);">sacred site</strong> by the Higaonon indigenous people. It plays a central role in their spiritual rituals, oral traditions, and ancestral beliefs about the origin of their community.</p>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-3 will-reveal">
+        <div class="env-card" style="background:var(--dark-card);border-left-color:var(--gold);">
+          <span class="env-icon">🏛️</span>
+          <h3 style="color:var(--white);">Protected Heritage Area</h3>
+          <p style="color:#aaa;">Recognized as a <strong style="color:var(--gold-light);">protected natural heritage area</strong>, Lake Apo is governed by conservation guidelines to preserve its ecosystem, water quality, and the ancestral lands of the surrounding Higaonon communities.</p>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-3 will-reveal">
+        <div class="env-card" style="background:var(--dark-card);border-left-color:var(--gold);">
+          <span class="env-icon">🎭</span>
+          <h3 style="color:var(--white);">Cultural Practices</h3>
+          <p style="color:#aaa;">The Higaonon conduct regular <strong style="color:var(--gold-light);">rituals and ceremonies</strong> on the lake's shores — harvest thanksgiving rites, healing ceremonies, and community gatherings practised for centuries.</p>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-3 will-reveal">
+        <div class="env-card" style="background:var(--dark-card);border-left-color:var(--gold);">
+          <span class="env-icon">☕</span>
+          <h3 style="color:var(--white);">Highland Coffee Legacy</h3>
+          <p style="color:#aaa;">The Higaonon communities surrounding Lake Apo have cultivated <strong style="color:var(--gold-light);">Arabica coffee</strong> for generations — a practice that sustains their livelihood and produces some of the Philippines' finest specialty coffee.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ WILDLIFE ══ -->
+<section class="section-block section-warm" id="wildlife" style="scroll-margin-top:140px;">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="section-eyebrow">Eco-Tourism</div>
+      <h2 class="section-heading">Wildlife &amp; Biodiversity</h2>
+      <div class="section-rule mx-auto"></div>
+      <p class="section-intro">Lake Apo is one of the most biodiverse areas in Mindanao — a sanctuary for rare and endemic species.</p>
+    </div>
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6 will-reveal">
+        <h3 style="font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--black);letter-spacing:1px;margin-bottom:16px;">A Living Natural Sanctuary</h3>
+        <p class="section-body">Lake Apo is one of the few places in the Philippines where you can spot the <strong>Philippine Eagle</strong> in its natural highland habitat. The majestic national bird soars over the lake's forested slopes — an awe-inspiring sight for birdwatchers and nature lovers.</p>
+        <p class="section-body mt-3">The surrounding forests shelter over <strong>50 species of birds</strong>, including several endemic Mindanao species found nowhere else in the world. Along with its avian residents, the lake supports rare freshwater fish, amphibians, native orchids, and ferns that thrive in its unique high-altitude ecosystem.</p>
+        <div class="row g-3 mt-4">
+          <div class="col-6"><div class="info-pill"><i class="bi bi-feather"></i>Philippine Eagle Habitat</div></div>
+          <div class="col-6"><div class="info-pill"><i class="bi bi-camera-fill"></i>Premier Birdwatching Site</div></div>
+          <div class="col-6"><div class="info-pill"><i class="bi bi-flower1"></i>Endemic Flora &amp; Orchids</div></div>
+          <div class="col-6"><div class="info-pill"><i class="bi bi-shield-check-fill"></i>Protected Ecosystem</div></div>
+        </div>
+      </div>
+      <div class="col-lg-6 will-reveal">
+        <div class="row g-3">
+          <div class="col-sm-6 will-reveal">
+            <div class="info-card">
+              <div class="info-card-icon">🦅</div>
+              <h3>Philippine Eagle</h3>
+              <p>One of the most endangered birds in the world, the Philippine Eagle can be spotted soaring over Lake Apo's highland forests — a rare and unforgettable wildlife encounter.</p>
+            </div>
+          </div>
+          <div class="col-sm-6 will-reveal">
+            <div class="info-card">
+              <div class="info-card-icon">🦜</div>
+              <h3>50+ Bird Species</h3>
+              <p>Over 50 bird species have been recorded around Lake Apo, including endemic Mindanao species — making this a premier destination for birdwatching in the Philippines.</p>
+            </div>
+          </div>
+          <div class="col-sm-6 will-reveal">
+            <div class="info-card">
+              <div class="info-card-icon">🌺</div>
+              <h3>Native Orchids</h3>
+              <p>The forests shelter rare native orchids and highland wildflowers found nowhere else on earth — a botanical treasure trove that delights hikers and plant enthusiasts.</p>
+            </div>
+          </div>
+          <div class="col-sm-6 will-reveal">
+            <div class="info-card">
+              <div class="info-card-icon">🐟</div>
+              <h3>Endemic Fish</h3>
+              <p>Lake Apo's waters support endemic freshwater fish species unique to the lake ecosystem — an important scientific resource and symbol of Bukidnon's natural wealth.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ARCHITECTURE & DESIGN ══ -->
+<section class="section-block section-dark" id="architecture" style="scroll-margin-top:140px;">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="section-eyebrow light">Built Environment</div>
+      <h2 class="section-heading light">Architecture &amp; Design</h2>
+      <div class="section-rule mx-auto"></div>
+      <p class="section-intro">Structures around Lake Apo blend indigenous Higaonon traditions with natural materials to create harmonious lakeside spaces.</p>
+    </div>
+    <div class="row g-4">
+
+      <div class="col-sm-6 col-lg-3 will-reveal">
+        <div class="env-card" style="background:var(--dark-card);border-left-color:var(--gold);">
+          <span class="env-icon" style="color:var(--gold);">🛖</span>
+          <h3 style="color:var(--white);">Floating Cottages</h3>
+          <p style="color:#aaa;">Traditional <strong style="color:var(--gold-light);">floating cottages</strong> sit gently on the lake's emerald surface, offering visitors an immersive experience surrounded by water, mist, and the sounds of highland nature.</p>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-3 will-reveal">
+        <div class="env-card" style="background:var(--dark-card);border-left-color:var(--gold);">
+          <span class="env-icon">🎋</span>
+          <h3 style="color:var(--white);">Bamboo Structures</h3>
+          <p style="color:#aaa;">Rest houses, viewpoints, and community halls are built from locally sourced <strong style="color:var(--gold-light);">bamboo and native timber</strong> — eco-friendly structures that blend seamlessly with the lake's natural environment.</p>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-3 will-reveal">
+        <div class="env-card" style="background:var(--dark-card);border-left-color:var(--gold);">
+          <span class="env-icon">🏞️</span>
+          <h3 style="color:var(--white);">Lakeside Viewpoints</h3>
+          <p style="color:#aaa;">Elevated <strong style="color:var(--gold-light);">viewing decks and observation platforms</strong> offer panoramic views of the crater lake, surrounding highland forests, and distant mountain ridges — perfect for photography and contemplation.</p>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-3 will-reveal">
+        <div class="env-card" style="background:var(--dark-card);border-left-color:var(--gold);">
+          <span class="env-icon">🏺</span>
+          <h3 style="color:var(--white);">Indigenous Design Elements</h3>
+          <p style="color:#aaa;">Structures around the lake incorporate <strong style="color:var(--gold-light);">Higaonon cultural motifs</strong> — traditional patterns, carvings, and color symbolism that tell the story of the indigenous community's deep connection to the lake.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ PRODUCTS ══ -->
+<section class="section-block" id="products" style="scroll-margin-top:140px;">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="section-eyebrow">Pasalubong</div>
+      <h2 class="section-heading">Products &amp; Souvenirs</h2>
+      <div class="section-rule mx-auto"></div>
+      <p class="section-intro">Take a piece of Lake Apo home — each product tells a story of the land and its people.</p>
+    </div>
+    <div class="row g-4">
+
+      <div class="col-sm-6 col-lg-3 will-reveal">
+        <div class="product-card">
+          <span class="product-icon">☕</span>
+          <h3>Lake Apo Coffee</h3>
+          <p>Specialty <strong style="color:var(--gold-light);">highland Arabica coffee</strong> grown by Higaonon farmers on the slopes surrounding Lake Apo. Available as whole beans, ground coffee, and drip bags — a premium take-home gift for coffee lovers.</p>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-3 will-reveal">
+        <div class="product-card">
+          <span class="product-icon">🧺</span>
+          <h3>Woven Crafts</h3>
+          <p>Handwoven <strong style="color:var(--gold-light);">baskets, bags, and textiles</strong> crafted by Higaonon artisans using traditional techniques passed down through generations. Every piece is unique and culturally significant.</p>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-3 will-reveal">
+        <div class="product-card">
+          <span class="product-icon">📿</span>
+          <h3>Native Beadwork</h3>
+          <p>Beautiful <strong style="color:var(--gold-light);">beaded necklaces, bracelets, and accessories</strong> made by local craftspeople following indigenous Higaonon patterns and color symbolism. Wearable cultural souvenirs with deep meaning.</p>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-3 will-reveal">
+        <div class="product-card">
+          <span class="product-icon">🥬</span>
+          <h3>Organic Produce</h3>
+          <p>Fresh <strong style="color:var(--gold-light);">highland vegetables, native herbs, and dried fruits</strong> produced by farmers in the Lake Apo area using organic methods. Healthy, fresh, and straight from highland farms to your table.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ VISITOR TIPS ══ -->
+<section class="section-block section-dark" id="tips" style="scroll-margin-top:140px;">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="section-eyebrow light">Before You Go</div>
+      <h2 class="section-heading light">Visitor Tips</h2>
+      <div class="section-rule mx-auto"></div>
+      <p class="section-intro" style="color:#aaa;">Plan a respectful, safe, and memorable visit to this sacred natural wonder.</p>
+    </div>
+    <div class="row g-4">
+
+      <div class="col-sm-6 col-lg-4 will-reveal">
+        <div class="tip-card"><span class="tip-icon">🚌</span><h3>How to Get There</h3>
+          <p>From <strong style="color:white;">Valencia City</strong>, take a habal-habal or jeepney toward the lake area (~30–45 mins). Alternatively, hire a private vehicle from Malaybalay City. Organized tours are also available.</p>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-4 will-reveal">
+        <div class="tip-card"><span class="tip-icon">🧑‍🤝‍🧑</span><h3>Hire a Local Guide</h3>
+          <p>Always hire a <strong style="color:white;">registered Higaonon guide</strong>. They provide cultural context and safety on forest trails. Their fees directly support the local indigenous community and families.</p>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-4 will-reveal">
+        <div class="tip-card"><span class="tip-icon">🙏</span><h3>Respect Indigenous Culture</h3>
+          <p>Lake Apo is a <strong style="color:white;">sacred site</strong>. Ask permission before photographing community members, avoid loud noise near ceremony areas, and strictly follow all instructions from your guide.</p>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-4 will-reveal">
+        <div class="tip-card"><span class="tip-icon">📷</span><h3>Best Time for Photos</h3>
+          <p>The lake is most photogenic in the <strong style="color:white;">early morning (6–8 AM)</strong> when mist drifts over the emerald surface and soft light filters through the surrounding highland forest.</p>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-4 will-reveal">
+        <div class="tip-card"><span class="tip-icon">🧥</span><h3>Dress for the Highlands</h3>
+          <p>The lake area can be <strong style="color:white;">cool and misty</strong>. Bring a light jacket, wear comfortable walking shoes, and apply insect repellent before walking forest trails around the lake.</p>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-4 will-reveal">
+        <div class="tip-card"><span class="tip-icon">🌿</span><h3>Leave No Trace</h3>
+          <p>Help preserve this sacred natural space. <strong style="color:white;">Carry out all trash</strong>, avoid picking plants or disturbing wildlife, and stay strictly on designated paths at all times.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ FESTIVAL ══ -->
+<section class="section-block" id="festival" style="scroll-margin-top:140px;">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-9 will-reveal">
+        <div class="festival-card text-center">
+          <div class="festival-badge">2025</div>
+          <h2 class="festival-title-txt">KAAMULAN FESTIVAL</h2>
+          <p class="festival-dates-txt"><i class="bi bi-calendar-event me-2"></i>March 21 – April 23</p>
+          <div class="festival-rule mx-auto"></div>
+          <p class="festival-desc">Experience the vibrant culture of Bukidnon! Celebrate the rich traditions of Bukidnon's seven indigenous groups — Higaonon, Manobo, Matigsalug, Talaandig, Tigwahanon, and Umayamnon. Don't miss the colorful festivities, cultural performances, and a showcase of indigenous heritage!</p>
+          <div class="festival-hl justify-content-center">
+            <i class="bi bi-star-fill" style="color:var(--gold);flex-shrink:0;"></i>
+            <span><strong>Celebrity Night — April 13:</strong> TJ Monterde &amp; KZ Tandingan</span>
+          </div>
+          <div class="d-flex flex-wrap gap-2 justify-content-center mt-4">
+            <a href="https://www.facebook.com/hashtag/kaamulan2025"     target="_blank" rel="noopener" class="fest-tag">#Kaamulan2025</a>
+            <a href="https://www.facebook.com/hashtag/bukidnon"         target="_blank" rel="noopener" class="fest-tag">#Bukidnon</a>
+            <a href="https://www.facebook.com/hashtag/culturalfestival" target="_blank" rel="noopener" class="fest-tag">#CulturalFestival</a>
+            <a href="https://www.facebook.com/hashtag/lakeapo"          target="_blank" rel="noopener" class="fest-tag">#LakeApo</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA BANNER ══ -->
+<section style="background:linear-gradient(135deg,var(--gold-dark),var(--gold));padding:60px 0;">
+  <div class="container text-center">
+    <h2 style="font-family:var(--font-display);font-size:clamp(22px,3vw,34px);font-weight:900;color:var(--black);letter-spacing:2px;margin-bottom:12px;">Discover the Magic of Lake Apo</h2>
+    <p style="font-size:15px;color:rgba(0,0,0,.65);margin-bottom:28px;max-width:500px;margin-left:auto;margin-right:auto;">Let our tourism team help you plan an unforgettable lakeside experience.</p>
+    <div class="d-flex gap-3 flex-wrap justify-content-center">
+      <a href="index.html#inquiry" style="display:inline-block;padding:13px 36px;background:var(--black);color:var(--gold);font-family:var(--font-display);font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;border-radius:4px;border:2px solid var(--black);"><i class="bi bi-envelope-fill me-2"></i>Send an Inquiry</a>
+      <a href="index.html#destinations" style="display:inline-block;padding:13px 36px;background:transparent;color:var(--black);font-family:var(--font-display);font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;border-radius:4px;border:2px solid rgba(0,0,0,.4);"><i class="bi bi-compass me-2"></i>More Destinations</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <div class="d-flex align-items-center gap-3 mb-3">
+          <img src="image/logo.png" alt="Logo" class="footer-logo">
+          <div>
+            <p class="footer-province-sub">REPUBLIC OF THE PHILIPPINES</p>
+            <p class="footer-province-name">PROVINCIAL GOVERNMENT<br>OF BUKIDNON</p>
+          </div>
+        </div>
+        <p class="footer-about">All content is in the public domain unless otherwise stated. Promoting sustainable tourism in Bukidnon.</p>
+      </div>
+      <div class="col-sm-6 col-lg-4">
+        <h5 class="footer-heading">Tourist Destinations</h5>
+        <ul class="footer-links">
+          <li><a href="dahilayan-overview.html">Dahilayan Adventure Park</a></li>
+          <li><a href="communal-ranch-overview.html">Communal Ranch</a></li>
+          <li><a href="Camp-Philips.html">Camp Philips</a></li>
+          <li><a href="lakeapo-overview.html">Lake Apo</a></li>
+          <li><a href="capistrano-overview.html">Mt. Capistrano</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-6 col-lg-4">
+        <h5 class="footer-heading">GOV.PH</h5>
+        <ul class="footer-links">
+          <li><a href="https://data.gov.ph/" target="_blank">Open Data Portal</a></li>
+          <li><a href="https://www.officialgazette.gov.ph/" target="_blank">Official Gazette</a></li>
+          <li><a href="https://bukidnon.gov.ph/" target="_blank">Provincial Government</a></li>
+          <li><a href="https://www.tourism.gov.ph/" target="_blank">DOT Philippines</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Provincial Government of Bukidnon. All Rights Reserved.</p>
+      <p><a href="index.html" style="color:#666;">← Back to Homepage</a></p>
+    </div>
+  </div>
+</footer>
+
+<button id="backToTop" class="back-to-top" aria-label="Back to top"><i class="bi bi-arrow-up"></i></button>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mainNav      = document.getElementById('mainNav');
+  hamburgerBtn?.addEventListener('click', () => { mainNav.classList.toggle('nav-open'); hamburgerBtn.classList.toggle('active'); });
+
+  document.querySelectorAll('.nav-item-custom > .nav-link-custom').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const dd = this.nextElementSibling;
+      if (window.innerWidth < 1200 && dd?.classList.contains('nav-dropdown')) {
+        e.preventDefault();
+        const p = this.parentElement, open = p.classList.contains('nav-item-open');
+        document.querySelectorAll('.nav-item-custom').forEach(i => i.classList.remove('nav-item-open'));
+        if (!open) p.classList.add('nav-item-open');
+      }
+    });
+  });
+
+  const SECS = ['overview','history','wildlife','architecture','products','tips','festival'];
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    SECS.forEach(id => { const el = document.getElementById(id); if (el && window.scrollY >= el.offsetTop - 180) cur = id; });
+    SECS.forEach(id => { const li = document.getElementById('nav-' + id); if (li) li.classList.toggle('nav-item-active', id === cur); });
+  });
+
+  const siteHeader = document.getElementById('siteHeader'), backToTop = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    siteHeader.classList.toggle('header-scrolled', window.scrollY > 60);
+    backToTop.classList.toggle('visible', window.scrollY > 400);
+  });
+  backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  const obs = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); obs.unobserve(e.target); } }), { threshold: 0.12 });
+  document.querySelectorAll('.will-reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

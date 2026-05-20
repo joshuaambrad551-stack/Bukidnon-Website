@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CEDAR Falls – Impasugong, Bukidnon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Lato:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link rel="stylesheet" href="styles/index_style.css">
+
+<style>
+  :root {
+    --gold: #ccbc52;
+    --gold-dark: #a89c38;
+    --black: #0e0e0e;
+    --dark: #141414;
+    --dark-card: #1c1c1c;
+    --white: #fff;
+  }
+
+  .hero-destination {
+    height: 70vh;
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.8)), url('image/cedar.jpg') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+  }
+
+  .spec-card {
+    background: var(--dark-card);
+    border: 1px solid rgba(204,188,82,0.2);
+    padding: 2rem;
+    border-radius: 15px;
+    height: 100%;
+    transition: transform 0.3s ease;
+  }
+
+  .spec-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--gold);
+  }
+
+  .waterfall-name {
+    color: var(--gold);
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+
+  <section class="hero-destination">
+    <div class="container">
+      <span class="badge bg-gold text-dark mb-3 px-3 py-2">Category: Waterfall</span>
+      <h1 class="display-2 fw-bold font-display">CEDAR Falls</h1>
+      <p class="lead font-display text-gold">Center for Ecological Development and Recreation</p>
+      <div class="d-flex justify-content-center gap-4 mt-4">
+        <span><i class="bi bi-geo-alt-fill text-gold"></i> Impasugong, Bukidnon</span>
+        <span><i class="bi bi-clock-fill text-gold"></i> 8:00 AM - 5:00 PM</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-block bg-white text-dark">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+        <div class="col-lg-6">
+          <div class="section-eyebrow">Overview</div>
+          <h2 class="section-heading">A Reforestation Paradise</h2>
+          <div class="section-rule"></div>
+          <p class="section-body">
+            CEDAR is a man-made forest development project that has evolved into one of Bukidnon's premier eco-tourism sites. Spanning over 1,700 hectares, it serves as a cold-spring sanctuary for those looking to escape into nature.
+          </p>
+          <p class="section-body mt-3">
+            The park is most famous for its <strong>"Three Falls"</strong>—a series of cascades hidden within a lush trek through diverse tree species and natural springs.
+          </p>
+          
+          <div class="mt-4 p-4 border-start border-gold border-4 bg-light">
+            <h5 class="font-display fw-bold">Admission Details</h5>
+            <ul class="list-unstyled mb-0">
+              <li><i class="bi bi-check2-circle text-success me-2"></i><strong>Entrance Fee:</strong> ₱20.00 per person</li>
+              <li><i class="bi bi-check2-circle text-success me-2"></i><strong>Environmental Fee:</strong> ₱10.00</li>
+              <li><i class="bi bi-check2-circle text-success me-2"></i><strong>Parking:</strong> Available near the entrance</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="row g-3">
+                <div class="col-12">
+                    <div class="spec-card">
+                        <h4 class="waterfall-name">Gantungan Falls</h4>
+                        <p class="small text-white-50">The most accessible and widest among the three, perfect for a refreshing dip after a short hike.</p>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="spec-card">
+                        <h4 class="waterfall-name">Natigbasan Falls</h4>
+                        <p class="small text-white-50">A taller, more narrow cascade that offers a serene and photogenic atmosphere deeper in the forest.</p>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="spec-card">
+                        <h4 class="waterfall-name">Dila Falls</h4>
+                        <p class="small text-white-50">Known for its unique rock formation shaped like a tongue ("Dila"), this is the most challenging but rewarding trek.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ PHOTO GALLERY ══════════════════ -->
+  <section class="section-block section-dark">
+    <div class="container">
+      <div class="text-center mb-5">
+        <div class="section-eyebrow light">Gallery</div>
+        <h2 class="section-heading light">CEDAR Falls in Photos</h2>
+        <div class="section-rule mx-auto"></div>
+      </div>
+
+      <div class="cedar-gallery">
+        <div class="cedar-gallery-main">
+          <img src="image/cedar1.jpg" alt="CEDAR Falls" class="cedar-gallery-img cedar-gallery-img--tall" id="lightMainImg">
+        </div>
+        <div class="cedar-gallery-grid">
+          <img src="image/cedar1.jpg" alt="CEDAR Falls View 1" class="cedar-gallery-img cedar-thumb active" data-src="image/cedar1.jpg">
+          <img src="image/cedar2.jpg" alt="CEDAR Falls View 2" class="cedar-gallery-img cedar-thumb" data-src="image/cedar2.jpg">
+          <img src="image/cedar3.jpg" alt="CEDAR Falls View 3" class="cedar-gallery-img cedar-thumb" data-src="image/cedar3.jpg">
+          <img src="image/cedar4.jpg" alt="CEDAR Falls View 4" class="cedar-gallery-img cedar-thumb" data-src="image/cedar4.jpg">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .cedar-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .cedar-gallery-main { overflow: hidden; border-radius: 12px; }
+    .cedar-gallery-img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 12px; }
+    .cedar-gallery-img--tall { height: 480px; }
+    .cedar-gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+    .cedar-thumb { height: 228px; cursor: pointer; opacity: 0.7; transition: opacity .25s, outline .25s; outline: 3px solid transparent; }
+    .cedar-thumb:hover { opacity: 1; }
+    .cedar-thumb.active { opacity: 1; outline-color: var(--gold); }
+    @media (max-width: 768px) {
+      .cedar-gallery { grid-template-columns: 1fr; }
+      .cedar-gallery-img--tall { height: 260px; }
+      .cedar-thumb { height: 130px; }
+    }
+  </style>
+
+  <script>
+    document.querySelectorAll('.cedar-thumb').forEach(thumb => {
+      thumb.addEventListener('click', function() {
+        document.getElementById('lightMainImg').src = this.dataset.src;
+        document.querySelectorAll('.cedar-thumb').forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+  </script>
+
+  <section class="section-block section-dark" style="padding-top:0;">
+    <div class="container text-center">
+      <div class="section-eyebrow light">Traveler Advice</div>
+      <h2 class="section-heading light">Tips for your Visit</h2>
+      <div class="section-rule mx-auto"></div>
+      
+      <div class="row mt-5 g-4 text-start">
+        <div class="col-md-4">
+            <div class="tribe-card p-4 h-100">
+                <i class="bi bi-water text-gold fs-2 mb-3"></i>
+                <h5 class="text-white">Gear Up</h5>
+                <p class="small text-white-50">Wear non-slip hiking sandals or shoes. The trails can be slippery, especially near the river crossings.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="tribe-card p-4 h-100">
+                <i class="bi bi-trash text-gold fs-2 mb-3"></i>
+                <h5 class="text-white">Leave No Trace</h5>
+                <p class="small text-white-50">As an ecological center, strict rules apply to trash. Bring your own reusable water bottles and take your waste back with you.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="tribe-card p-4 h-100">
+                <i class="bi bi-brightness-high text-gold fs-2 mb-3"></i>
+                <h5 class="text-white">Best Timing</h5>
+                <p class="small text-white-50">Visit during the morning (between 8 AM and 10 AM) to enjoy the falls before the afternoon crowds arrive.</p>
+            </div>
+        </div>
+      </div>
+      
+      <div class="mt-5">
+        <a href="index.html#destinations" class="btn btn-gold px-5 py-3 rounded-pill font-display fw-bold">Back to Destinations</a>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<footer class="site-footer">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <div class="d-flex align-items-center gap-3 mb-3">
+              <img src="image/logo.png" alt="Logo" class="footer-logo" onerror="this.style.display='none'">
+              <div>
+                <p class="footer-province-sub">REPUBLIC OF THE PHILIPPINES</p>
+                <p class="footer-province-name">PROVINCIAL GOVERNMENT<br>OF BUKIDNON</p>
+              </div>
+            </div>
+            <p class="footer-about">All content is in the public domain unless otherwise stated. Promoting sustainable tourism in Bukidnon.</p>
+            <div class="d-flex gap-3 mt-3">
+              <a href="#" class="social-btn"><i class="bi bi-facebook"></i></a>
+              <a href="#" class="social-btn"><i class="bi bi-instagram"></i></a>
+              <a href="#" class="social-btn"><i class="bi bi-youtube"></i></a>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-2">
+            <h5 class="footer-heading">Explore</h5>
+            <ul class="footer-links">
+              <li><a href="index.html#about">About</a></li>
+              <li><a href="index.html#destinations">Destinations</a></li>
+              <li><a href="index.html#festivals">Festivals</a></li>
+              <li><a href="index.html#food">Food</a></li>
+              <li><a href="gallery.html">Gallery</a></li>
+            </ul>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <h5 class="footer-heading">Government Links</h5>
+            <ul class="footer-links">
+              <li><a href="https://bukidnon.gov.ph" target="_blank">Provincial Government</a></li>
+              <li><a href="https://data.gov.ph/" target="_blank">Open Data Portal</a></li>
+              <li><a href="https://www.officialgazette.gov.ph/" target="_blank">Official Gazette</a></li>
+              <li><a href="https://www.tourism.gov.ph/" target="_blank">DOT Philippines</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3">
+            <h5 class="footer-heading">Visit Us</h5>
+            <ul class="footer-links">
+              <li><i class="bi bi-geo-alt-fill text-gold me-2"></i>Capitol Drive, Malaybalay City</li>
+              <li><i class="bi bi-telephone-fill text-gold me-2"></i>(088) 813-5500</li>
+              <li><i class="bi bi-envelope-fill text-gold me-2"></i>tourism@bukidnon.gov.ph</li>
+              <li><i class="bi bi-clock-fill text-gold me-2"></i>Mon – Fri: 8AM – 5PM</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2026 Provincial Government of Bukidnon. All Rights Reserved.</p>
+          <p>Designed for academic purposes.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Hamburger Toggle
+        document.getElementById('hamburgerBtn').addEventListener('click', function() {
+            this.classList.toggle('active');
+            document.getElementById('mainNav').classList.toggle('nav-open');
+        });
+    </script>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

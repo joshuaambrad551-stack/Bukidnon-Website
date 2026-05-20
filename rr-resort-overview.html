@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RR Family Spring Resort – Maramag, Bukidnon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Lato:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link rel="stylesheet" href="styles/index_style.css">
+
+<style>
+  :root {
+    --gold: #ccbc52;
+    --gold-dark: #a89c38;
+    --black: #0e0e0e;
+    --dark: #141414;
+    --dark-card: #1c1c1c;
+    --white: #fff;
+    --off-white: #fafaf5;
+  }
+
+  /* Fixed Header Styling */
+  .site-header { background: var(--black); padding: 10px 0; border-bottom: 2px solid var(--gold); }
+  .header-sub { color: var(--gold); font-size: 0.7rem; letter-spacing: 2px; }
+  .header-title { color: var(--white); font-family: 'Cinzel', serif; font-size: 1.2rem; }
+
+  /* Hero Section with Background Photo */
+  .hero-destination {
+    height: 70vh;
+    /* BACKGROUND PHOTO UPDATED HERE */
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)), url('image/rr.jpg') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    border-bottom: 5px solid var(--gold);
+  }
+
+  .amenity-card {
+    background: var(--off-white);
+    border-bottom: 4px solid var(--gold);
+    padding: 2.5rem;
+    border-radius: 15px;
+    height: 100%;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  }
+
+  .amenity-card:hover {
+    background: var(--white);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    transform: translateY(-10px);
+  }
+
+  .resort-feature-icon {
+    font-size: 3rem;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    display: block;
+  }
+</style>
+</head>
+<body>
+
+  <header class="site-header sticky-top">
+    <div class="container d-flex align-items-center justify-content-between">
+      <div class="d-flex align-items-center gap-3">
+        <img src="image/logo.png" alt="Logo" style="height: 50px;">
+        <div>
+          <p class="header-sub mb-0">REPUBLIC OF THE PHILIPPINES</p>
+          <h1 class="header-title mb-0">PROVINCIAL GOVERNMENT OF BUKIDNON</h1>
+        </div>
+      </div>
+      <a href="index.html" class="btn btn-outline-gold btn-sm px-4">Return Home</a>
+    </div>
+  </header>
+
+  <section class="hero-destination">
+    <div class="container">
+      <span class="badge bg-gold text-dark mb-3 px-3 py-2 fw-bold shadow">Category: Beach / Inland Resort</span>
+      <h1 class="display-2 fw-bold font-display">RR Family Spring Resort</h1>
+      <p class="lead font-display text-gold fs-3">The Refreshing Heart of Maramag</p>
+      <div class="d-flex justify-content-center gap-5 mt-4">
+        <span class="fs-5"><i class="bi bi-geo-alt-fill text-gold"></i> Maramag, Bukidnon</span>
+        <span class="fs-5"><i class="bi bi-clock-fill text-gold"></i> 7:00 AM - 9:00 PM</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-block bg-white text-dark" id="overview">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+        <div class="col-lg-6">
+          <div class="section-eyebrow">The Experience</div>
+          <h2 class="section-heading">Bukidnon's Inland Oasis</h2>
+          <div class="section-rule"></div>
+          <p class="section-body">
+            RR Family Spring Resort is one of the most popular water destinations in the province. Known for its crystal-clear, flowing spring waters, it offers a "beach-like" relaxation experience in the middle of landlocked Bukidnon.
+          </p>
+          <p class="section-body mt-3">
+            With vast Olympic-sized pools and smaller natural springs surrounded by tropical cottages, it is the perfect destination for family reunions, weekend getaways, and beating the tropical heat.
+          </p>
+          
+          <div class="mt-4 p-4 border-start border-gold border-4 bg-light shadow-sm rounded-end">
+            <h5 class="font-display fw-bold text-dark"><i class="bi bi-info-circle-fill text-gold me-2"></i>Visitor Information</h5>
+            <ul class="list-unstyled mb-0 mt-3">
+              <li class="mb-2"><i class="bi bi-tag-fill text-gold me-2"></i><strong>Entrance Fee:</strong> ₱50.00 (Adults) / ₱30.00 (Kids)</li>
+              <li class="mb-2"><i class="bi bi-house-door-fill text-gold me-2"></i><strong>Cottages:</strong> Starting at ₱300.00</li>
+              <li><i class="bi bi-p-circle-fill text-gold me-2"></i><strong>Parking:</strong> Large onsite parking area available</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-6">
+            <img src="image/rr1.jpg" alt="Pool Area" class="img-fluid shadow-lg" style="border-radius: 20px; border: 5px solid var(--off-white);">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-block section-warm">
+    <div class="container">
+        <div class="text-center mb-5">
+            <div class="section-eyebrow">Amenities</div>
+            <h2 class="section-heading">What Awaits You</h2>
+            <div class="section-rule mx-auto"></div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="amenity-card text-center">
+                    <i class="bi bi-tsunami resort-feature-icon"></i>
+                    <h4 class="font-display fw-bold">Natural Springs</h4>
+                    <p class="text-muted">Enjoy chemical-free swimming in pools fed by continuous natural spring water flowing from the mountains.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="amenity-card text-center">
+                    <i class="bi bi-cup-straw resort-feature-icon"></i>
+                    <h4 class="font-display fw-bold">Cottage Life</h4>
+                    <p class="text-muted">Spacious open-air huts and private gazebos perfect for boodle fights, BBQ, and large family picnics.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="amenity-card text-center">
+                    <i class="bi bi-moon-stars resort-feature-icon"></i>
+                    <h4 class="font-display fw-bold">Night Swimming</h4>
+                    <p class="text-muted">Stay late and enjoy the beautifully lit pools and the refreshing cool evening breeze of Maramag.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <footer class="section-block section-dark text-center">
+    <div class="container">
+      <h2 class="section-heading light">Ready for a Dip?</h2>
+      <p class="text-white-50 mb-5 fs-5">Visit Maramag today and experience the freshest waters in the province.</p>
+      <a href="index.html#destinations" class="btn btn-gold px-5 py-3 rounded-pill font-display fw-bold text-uppercase">Back to Destinations</a>
+      <div class="mt-5 pt-5 border-top border-secondary text-white-50 small">
+        &copy; 2026 Provincial Government of Bukidnon. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<footer class="site-footer">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <div class="d-flex align-items-center gap-3 mb-3">
+              <img src="image/logo.png" alt="Logo" class="footer-logo" onerror="this.style.display='none'">
+              <div>
+                <p class="footer-province-sub">REPUBLIC OF THE PHILIPPINES</p>
+                <p class="footer-province-name">PROVINCIAL GOVERNMENT<br>OF BUKIDNON</p>
+              </div>
+            </div>
+            <p class="footer-about">All content is in the public domain unless otherwise stated. Promoting sustainable tourism in Bukidnon.</p>
+            <div class="d-flex gap-3 mt-3">
+              <a href="#" class="social-btn"><i class="bi bi-facebook"></i></a>
+              <a href="#" class="social-btn"><i class="bi bi-instagram"></i></a>
+              <a href="#" class="social-btn"><i class="bi bi-youtube"></i></a>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-2">
+            <h5 class="footer-heading">Explore</h5>
+            <ul class="footer-links">
+              <li><a href="index.html#about">About</a></li>
+              <li><a href="index.html#destinations">Destinations</a></li>
+              <li><a href="index.html#festivals">Festivals</a></li>
+              <li><a href="index.html#food">Food</a></li>
+              <li><a href="gallery.html">Gallery</a></li>
+            </ul>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <h5 class="footer-heading">Government Links</h5>
+            <ul class="footer-links">
+              <li><a href="https://bukidnon.gov.ph" target="_blank">Provincial Government</a></li>
+              <li><a href="https://data.gov.ph/" target="_blank">Open Data Portal</a></li>
+              <li><a href="https://www.officialgazette.gov.ph/" target="_blank">Official Gazette</a></li>
+              <li><a href="https://www.tourism.gov.ph/" target="_blank">DOT Philippines</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3">
+            <h5 class="footer-heading">Visit Us</h5>
+            <ul class="footer-links">
+              <li><i class="bi bi-geo-alt-fill text-gold me-2"></i>Capitol Drive, Malaybalay City</li>
+              <li><i class="bi bi-telephone-fill text-gold me-2"></i>(088) 813-5500</li>
+              <li><i class="bi bi-envelope-fill text-gold me-2"></i>tourism@bukidnon.gov.ph</li>
+              <li><i class="bi bi-clock-fill text-gold me-2"></i>Mon – Fri: 8AM – 5PM</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2026 Provincial Government of Bukidnon. All Rights Reserved.</p>
+          <p>Designed for academic purposes.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Hamburger Toggle
+        document.getElementById('hamburgerBtn').addEventListener('click', function() {
+            this.classList.toggle('active');
+            document.getElementById('mainNav').classList.toggle('nav-open');
+        });
+    </script>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

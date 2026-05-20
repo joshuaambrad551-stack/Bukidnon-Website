@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>General Info – Bukidnon Tourism</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/index_style.css">
+    
+    <style>
+        /* Custom Accordion Overrides to match your theme */
+        .accordion-button:not(.collapsed) {
+            background-color: var(--gold-faint) !important;
+            color: var(--gold-dark) !important;
+            box-shadow: inset 0 -1px 0 rgba(0,0,0,.125);
+        }
+        .accordion-button:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 0.25rem rgba(204, 188, 82, 0.25);
+        }
+        .accordion-item {
+            border: 1px solid rgba(0,0,0,.05) !important;
+            border-radius: var(--radius) !important;
+        }
+        .info-icon-box {
+            width: 50px;
+            height: 50px;
+            background: var(--gold-faint);
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="header-inner d-flex align-items-center justify-content-between px-4">
+            <div class="d-flex align-items-center gap-3">
+                <img src="image/logo.png" alt="Bukidnon Logo" class="site-logo">
+                <div>
+                    <p class="header-sub mb-0">REPUBLIC OF THE PHILIPPINES</p>
+                    <h1 class="header-title mb-0">PROVINCIAL GOVERNMENT OF BUKIDNON</h1>
+                </div>
+            </div>
+            <button class="hamburger-btn d-xl-none" id="hamburgerBtn"><span></span><span></span><span></span></button>
+        </div>
+    </header>
+
+    <nav class="main-nav" id="mainNav">
+        <div class="nav-inner d-flex align-items-center px-4">
+            <ul class="nav-list d-flex align-items-stretch m-0 p-0 flex-wrap">
+                <li class="nav-item-custom"><a class="nav-link-custom" href="index.html">Home</a></li>
+                <li class="nav-item-custom"><a class="nav-link-custom" href="quickfacts.html">Quick Facts</a></li>
+                <li class="nav-item-custom"><a class="nav-link-custom active" href="generalinfo.html">General Info</a></li>
+                <li class="nav-item-custom"><a class="nav-link-custom" href="history.html">History</a></li>
+                <li class="nav-item-custom"><a class="nav-link-custom" href="artsandculture.html">Arts & Culture</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="section-block section-warm">
+        <div class="container">
+            <div class="text-center mb-5">
+                <div class="section-eyebrow">Logistics</div>
+                <h2 class="section-heading">Traveler’s Guide</h2>
+                <div class="section-rule mx-auto"></div>
+                <p class="section-body mx-auto" style="max-width: 700px;">
+                    Planning your trip to the highland paradise is easy. Here is everything you need to know about transportation, climate, and local etiquette.
+                </p>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <div class="accordion custom-accordion" id="travelAccordion">
+                        
+                        <div class="accordion-item mb-3 shadow-sm">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button fw-bold font-display" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                    <i class="bi bi-airplane-fill me-3 text-gold"></i> How to Get Here
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#travelAccordion">
+                                <div class="accordion-body section-body bg-white">
+                                    The primary entry point is through **Laguindingan Airport (CGY)**. From the airport, take a shuttle or taxi to the Agora Bus Terminal in Cagayan de Oro. Buses and vans depart frequently for Malaybalay City (approx. 2-3 hours) and Valencia City (approx. 3-4 hours).
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item mb-3 shadow-sm">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed fw-bold font-display" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                                    <i class="bi bi-thermometer-snow me-3 text-gold"></i> Climate & Clothing
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#travelAccordion">
+                                <div class="accordion-body section-body bg-white">
+                                    Bukidnon is known as the "Summer Capital of Mindanao" due to its cool weather. Daytime temperatures range from 20°C to 28°C, but can drop to 15°C at night in higher altitudes. **Recommendation:** Always bring a light jacket and comfortable walking shoes.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item shadow-sm">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed fw-bold font-display" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                                    <i class="bi bi-calendar-check-fill me-3 text-gold"></i> Best Time to Visit
+                                </button>
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#travelAccordion">
+                                <div class="accordion-body section-body bg-white">
+                                    For outdoor activities, the dry season from **March to May** is best. However, if you want to experience the soul of the province, visit during the **Kaamulan Festival** in August or September for the most authentic cultural experience in the Philippines.
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-block">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="tribe-card p-4 text-center h-100">
+                        <div class="info-icon-box mx-auto"><i class="bi bi-cash-coin fs-4"></i></div>
+                        <h4 class="font-display">Currency</h4>
+                        <p class="small text-white-50">Philippine Peso (PHP). Major cities like Valencia and Malaybalay have plenty of ATMs, but bring cash for rural adventures.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="tribe-card p-4 text-center h-100">
+                        <div class="info-icon-box mx-auto"><i class="bi bi-chat-dots-fill fs-4"></i></div>
+                        <h4 class="font-display">Language</h4>
+                        <p class="small text-white-50">Bisaya/Cebuano is the primary language. English and Tagalog are widely understood and used in government and business.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="tribe-card p-4 text-center h-100">
+                        <div class="info-icon-box mx-auto"><i class="bi bi-shield-check fs-4"></i></div>
+                        <h4 class="font-display">Safe Travels</h4>
+                        <p class="small text-white-50">Bukidnon is one of the most peaceful provinces in Mindanao. Locals are known for their warm hospitality and respect for nature.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        // Hamburger Toggle
+        document.getElementById('hamburgerBtn').addEventListener('click', function() {
+            this.classList.toggle('active');
+            document.getElementById('mainNav').classList.toggle('nav-open');
+        });
+    </script>
+<footer class="site-footer">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <div class="d-flex align-items-center gap-3 mb-3">
+              <img src="image/logo.png" alt="Logo" class="footer-logo" onerror="this.style.display='none'">
+              <div>
+                <p class="footer-province-sub">REPUBLIC OF THE PHILIPPINES</p>
+                <p class="footer-province-name">PROVINCIAL GOVERNMENT<br>OF BUKIDNON</p>
+              </div>
+            </div>
+            <p class="footer-about">All content is in the public domain unless otherwise stated. Promoting sustainable tourism in Bukidnon.</p>
+            <div class="d-flex gap-3 mt-3">
+              <a href="#" class="social-btn"><i class="bi bi-facebook"></i></a>
+              <a href="#" class="social-btn"><i class="bi bi-instagram"></i></a>
+              <a href="#" class="social-btn"><i class="bi bi-youtube"></i></a>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-2">
+            <h5 class="footer-heading">Explore</h5>
+            <ul class="footer-links">
+              <li><a href="index.html#about">About</a></li>
+              <li><a href="index.html#destinations">Destinations</a></li>
+              <li><a href="index.html#festivals">Festivals</a></li>
+              <li><a href="index.html#food">Food</a></li>
+              <li><a href="gallery.html">Gallery</a></li>
+            </ul>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <h5 class="footer-heading">Government Links</h5>
+            <ul class="footer-links">
+              <li><a href="https://bukidnon.gov.ph" target="_blank">Provincial Government</a></li>
+              <li><a href="https://data.gov.ph/" target="_blank">Open Data Portal</a></li>
+              <li><a href="https://www.officialgazette.gov.ph/" target="_blank">Official Gazette</a></li>
+              <li><a href="https://www.tourism.gov.ph/" target="_blank">DOT Philippines</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3">
+            <h5 class="footer-heading">Visit Us</h5>
+            <ul class="footer-links">
+              <li><i class="bi bi-geo-alt-fill text-gold me-2"></i>Capitol Drive, Malaybalay City</li>
+              <li><i class="bi bi-telephone-fill text-gold me-2"></i>(088) 813-5500</li>
+              <li><i class="bi bi-envelope-fill text-gold me-2"></i>tourism@bukidnon.gov.ph</li>
+              <li><i class="bi bi-clock-fill text-gold me-2"></i>Mon – Fri: 8AM – 5PM</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2026 Provincial Government of Bukidnon. All Rights Reserved.</p>
+          <p>Designed for academic purposes.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Hamburger Toggle
+        document.getElementById('hamburgerBtn').addEventListener('click', function() {
+            this.classList.toggle('active');
+            document.getElementById('mainNav').classList.toggle('nav-open');
+        });
+    </script>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
